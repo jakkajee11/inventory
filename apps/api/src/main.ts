@@ -43,7 +43,7 @@ async function bootstrap() {
 
   // CORS
   app.enableCors({
-    origin: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000'],
+    origin: process.env.CORS_ORIGINS?.split(',') || ['http://localhost:13100'],
     credentials: true,
   });
 
@@ -62,7 +62,7 @@ async function bootstrap() {
   // Global prefix
   app.setGlobalPrefix('api');
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 13101;
   await app.listen(port, '0.0.0.0');
 
   const logger = app.get(Logger);

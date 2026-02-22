@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const configuration = () => ({
   nodeEnv: process.env.NODE_ENV || 'development',
-  port: parseInt(process.env.PORT || '3001', 10),
+  port: parseInt(process.env.PORT || '13101', 10),
   database: {
     url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/inventory?schema=public',
   },
@@ -17,7 +17,7 @@ export const configuration = () => ({
     refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
   },
   cors: {
-    origins: process.env.CORS_ORIGINS || 'http://localhost:3000',
+    origins: process.env.CORS_ORIGINS || 'http://localhost:13100',
   },
   logLevel: process.env.LOG_LEVEL || 'info',
   app: {
@@ -29,7 +29,7 @@ export const configuration = () => ({
 // Validation schema for environment variables
 export const validationSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
-  PORT: z.string().transform(Number).default('3001'),
+  PORT: z.string().transform(Number).default('13101'),
   DATABASE_URL: z.string().min(1),
   JWT_SECRET: z.string().min(32).optional(),
   REDIS_HOST: z.string().default('localhost'),
