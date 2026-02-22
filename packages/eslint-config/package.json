@@ -1,0 +1,23 @@
+{
+  "name": "@inventory/eslint-config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "base.js",
+    "next.js",
+    "nest.js"
+  ],
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.1.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0",
+    "typescript": ">=5.0.0"
+  }
+}

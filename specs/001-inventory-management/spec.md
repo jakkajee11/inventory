@@ -175,6 +175,7 @@ As a business owner/manager, I need to receive alerts when stock is low or zero 
 - **FR-027**: System MUST use optimistic locking to prevent concurrent update conflicts
 - **FR-028**: System MUST support in-app notifications with optional email delivery
 - **FR-029**: System MUST limit stock alerts to 1 per product per day to prevent spam
+- **FR-030**: System MUST isolate data between companies (tenants) so users can only access data belonging to their own company
 
 ### Key Entities
 
@@ -191,7 +192,7 @@ As a business owner/manager, I need to receive alerts when stock is low or zero 
 - **Warehouse**: Storage location with code, name, address, phone, and default flag
 - **Notification**: User alert with type (LOW_STOCK/ZERO_STOCK/PENDING_APPROVAL/SYSTEM), title, message, read status, delivery channel, and timestamp
 - **AuditLog**: Action history with user, action type, entity type/id, old/new values, IP address, and timestamp
-- **Company**: Business entity with name, tax ID, address, phone, email, currency, timezone, logo, and settings
+- **Company**: Tenant boundary for multi-tenant SaaS - each company has isolated data; includes name, tax ID, address, phone, email, currency, timezone, logo, and settings
 
 ## Success Criteria *(mandatory)*
 
@@ -212,8 +213,15 @@ As a business owner/manager, I need to receive alerts when stock is low or zero 
 - **SC-013**: Low stock alerts are delivered within 5 minutes of threshold breach
 - **SC-014**: Data backup completes daily with 30-day retention
 
+## Clarifications
+
+### Session 2026-02-22
+
+- Q: Multi-tenancy model (single-tenant vs multi-tenant SaaS)? → A: Multi-tenant SaaS - Multiple companies on shared infrastructure with data isolation
+
 ## Assumptions
 
+- System is multi-tenant SaaS with data isolation between companies
 - Users have basic smartphone/computer literacy
 - Primary language is Thai with English as secondary
 - Currency is primarily Thai Baht (THB)
