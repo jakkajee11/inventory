@@ -43,7 +43,6 @@ export class AlertService {
           where: {
             userId: user.id,
             type: NotificationType.LOW_STOCK,
-            data: { productId: product.id },
             isRead: false,
             createdAt: { gte: new Date(Date.now() - 24 * 60 * 60 * 1000) }, // Last 24 hours
           },
@@ -73,7 +72,7 @@ export class AlertService {
 
   async checkAllCompaniesLowStock(): Promise<void> {
     const companies = await this.prisma.company.findMany({
-      where: { deletedAt: null },
+      where: { isActive: true },
       select: { id: true },
     });
 

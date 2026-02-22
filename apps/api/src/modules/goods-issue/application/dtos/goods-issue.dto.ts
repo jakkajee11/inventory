@@ -35,20 +35,24 @@ export class CreateGoodsIssueDto {
   @IsEnum(IssueType)
   issueType: IssueType;
 
-  @ApiProperty({ description: 'Warehouse ID', required: false })
-  @IsUUID()
-  @IsOptional()
-  warehouseId?: string;
-
-  @ApiProperty({ description: 'Destination', required: false })
+  @ApiProperty({ description: 'Recipient name', required: false })
   @IsString()
   @IsOptional()
-  destination?: string;
+  recipientName?: string;
 
-  @ApiProperty({ description: 'Reference', required: false })
+  @ApiProperty({ description: 'Recipient phone', required: false })
   @IsString()
   @IsOptional()
-  reference?: string;
+  recipientPhone?: string;
+
+  @ApiProperty({ description: 'Recipient email', required: false })
+  @IsString()
+  @IsOptional()
+  recipientEmail?: string;
+
+  @ApiProperty({ description: 'Issue date', required: false })
+  @IsOptional()
+  issueDate?: Date;
 
   @ApiProperty({ description: 'Notes', required: false })
   @IsString()

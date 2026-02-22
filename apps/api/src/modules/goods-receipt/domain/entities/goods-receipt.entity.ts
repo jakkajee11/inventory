@@ -38,16 +38,19 @@ export class GoodsReceipt {
   id!: string;
 
   @ApiProperty()
-  receiptNumber!: string;
+  receiptNo!: string;
+
+  @ApiProperty()
+  supplierName!: string;
 
   @ApiProperty({ required: false })
-  supplierName?: string;
+  supplierPhone?: string;
 
   @ApiProperty({ required: false })
-  supplierReference?: string;
+  supplierEmail?: string;
 
-  @ApiProperty({ required: false })
-  warehouseId?: string;
+  @ApiProperty()
+  receiptDate!: Date;
 
   @ApiProperty({ enum: ReceiptStatus })
   status!: ReceiptStatus;
@@ -58,17 +61,14 @@ export class GoodsReceipt {
   @ApiProperty()
   totalAmount!: number;
 
+  @ApiProperty({ required: false })
+  attachments?: any;
+
   @ApiProperty()
   companyId!: string;
 
   @ApiProperty()
   createdById!: string;
-
-  @ApiProperty({ required: false })
-  submittedById?: string;
-
-  @ApiProperty({ required: false })
-  submittedAt?: Date;
 
   @ApiProperty({ required: false })
   approvedById?: string;

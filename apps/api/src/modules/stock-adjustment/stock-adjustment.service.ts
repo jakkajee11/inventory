@@ -8,7 +8,7 @@ export class StockAdjustmentService {
   constructor(private readonly adjustmentRepository: StockAdjustmentRepository) {}
 
   async create(companyId: string, userId: string, dto: CreateStockAdjustmentDto): Promise<StockAdjustment> {
-    const adjustmentNumber = await this.adjustmentRepository.generateAdjustmentNumber(companyId);
+    const adjustmentNo = await this.adjustmentRepository.generateAdjustmentNumber(companyId);
 
     // For each item, we would fetch current stock and calculate adjustment
     // This would integrate with ProductService
@@ -17,20 +17,20 @@ export class StockAdjustmentService {
       productId: item.productId,
       quantityBefore: 0, // Would be fetched from current stock
       quantityAfter: item.quantityAfter,
-      adjustment: item.quantityAfter - 0, // quantityAfter - quantityBefore
+      quantityDiff: item.quantityAfter - 0, // quantityAfter - quantityBefore
       unitCost: 0, // Would be fetched from product's average cost
-      valueChange: 0, // adjustment * unitCost
-      reason: item.reason,
+      totalCost: 0, // quantityDiff * unitCost
+      notes: item.reason,
     }));
 
-    const totalValueChange = items.reduce((sum, item) => sum + item.valueChange, 0);
+    const totalAmount = items.reduce((sum, item) => sum + item.totalCost, 0);
 
     return this.adjustmentRepository.create({
-      adjustmentNumber,
+      adjustmentNo,
       adjustmentType: dto.adjustmentType,
-      warehouseId: dto.warehouseId,
+      adjustmentDate: new Date(),
       notes: dto.notes,
-      totalValueChange,
+      totalAmount,
       status: AdjustmentStatus.DRAFT,
       companyId,
       createdById: userId,

@@ -70,10 +70,16 @@ model User {
   role             Role              @relation(fields: [roleId], references: [id])
   company          Company           @relation(fields: [companyId], references: [id])
   warehouse        Warehouse?        @relation(fields: [warehouseId], references: [id])
-  stockMovements   StockMovement[]
-  goodsReceipts    GoodsReceipt[]
-  goodsIssues      GoodsIssue[]
-  stockAdjustments StockAdjustment[]
+  stockMovements          StockMovement[]
+  goodsReceiptsCreated    GoodsReceipt[]    @relation("GoodsReceiptCreatedBy")
+  goodsReceiptsApproved   GoodsReceipt[]    @relation("GoodsReceiptApprovedBy")
+  goodsReceiptsCancelled  GoodsReceipt[]    @relation("GoodsReceiptCancelledBy")
+  goodsIssuesCreated      GoodsIssue[]      @relation("GoodsIssueCreatedBy")
+  goodsIssuesApproved     GoodsIssue[]      @relation("GoodsIssueApprovedBy")
+  goodsIssuesCancelled    GoodsIssue[]      @relation("GoodsIssueCancelledBy")
+  stockAdjustmentsCreated    StockAdjustment[]    @relation("StockAdjustmentCreatedBy")
+  stockAdjustmentsApproved   StockAdjustment[]    @relation("StockAdjustmentApprovedBy")
+  stockAdjustmentsCancelled  StockAdjustment[]    @relation("StockAdjustmentCancelledBy")
   notifications    Notification[]
   auditLogs        AuditLog[]
 

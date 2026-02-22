@@ -33,7 +33,7 @@ export class PrismaService
       );
 
       for (const model of models) {
-        await (this as Record<string, { deleteMany: () => Promise<unknown> }>)[
+        await (this as unknown as Record<string, { deleteMany: () => Promise<unknown> }>)[
           model as string
         ].deleteMany();
       }

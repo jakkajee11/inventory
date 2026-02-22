@@ -214,6 +214,10 @@ export class AuditLogInterceptor implements NestInterceptor {
    * In production, this should write to a persistent audit log store
    */
   private logAuditEntry(entry: AuditLogEntry): void {
+    const entityIdStr = entry.entityId ? ` (${entry.entityId})` : '';
+    const userIdStr = entry.userId ?? 'anonymous';
+    const message = `Audit: ${entry.action} on ${entry.entityType}${entityIdStr} by ${userIdStr}`;
+
     this.logger.info(
       {
         audit: {
@@ -228,7 +232,8 @@ export class AuditLogInterceptor implements NestInterceptor {
           duration: entry.duration,
           error: entry.error,
         },
-        `Audit: ${entry.action} on ${entry.entityType}${entry.entityId ? ` (${entry.entityId})` : ''} by ${entry.userId ?? 'anonymous'}`,
+      },
+      message,
     );
 
     // TODO: In production, also write to database via Prisma

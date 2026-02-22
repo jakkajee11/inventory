@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role, Permission } from '../../user/domain/entities/role.entity';
+import { Role, Permission } from '../../../user/domain/entities';
 
 export class UserResponseDto {
   @ApiProperty({ description: 'Unique identifier for the user' })

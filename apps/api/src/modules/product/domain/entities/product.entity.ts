@@ -45,11 +45,8 @@ export class Product {
   @ApiProperty({ description: 'Weighted average cost', example: 95.50, default: 0 })
   averageCost: number;
 
-  @ApiProperty({ description: 'Product image URL', required: false })
-  imageUrl?: string;
-
   @ApiProperty({ description: 'Product images (JSON array of URLs)', required: false })
-  images?: string[];
+  images?: any;
 
   @ApiProperty({ description: 'Whether the product is active', example: true, default: true })
   isActive: boolean;

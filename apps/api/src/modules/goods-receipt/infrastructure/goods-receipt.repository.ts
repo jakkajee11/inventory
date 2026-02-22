@@ -18,9 +18,9 @@ export class GoodsReceiptRepository {
     return receipt ? this.mapToEntity(receipt) : null;
   }
 
-  async findByReceiptNumber(receiptNumber: string, companyId: string): Promise<GoodsReceipt | null> {
+  async findByReceiptNumber(receiptNo: string, companyId: string): Promise<GoodsReceipt | null> {
     const receipt = await this.prisma.goodsReceipt.findFirst({
-      where: { receiptNumber, companyId },
+      where: { receiptNo, companyId },
     });
     return receipt ? this.mapToEntity(receipt) : null;
   }
@@ -59,13 +59,15 @@ export class GoodsReceiptRepository {
   async create(data: Partial<GoodsReceipt>, items: Partial<GoodsReceiptItem>[]): Promise<GoodsReceipt> {
     const receipt = await this.prisma.goodsReceipt.create({
       data: {
-        receiptNumber: data.receiptNumber!,
-        supplierName: data.supplierName,
-        supplierReference: data.supplierReference,
-        warehouseId: data.warehouseId,
+        receiptNo: data.receiptNo!,
+        supplierName: data.supplierName!,
+        supplierPhone: data.supplierPhone,
+        supplierEmail: data.supplierEmail,
+        receiptDate: data.receiptDate ?? new Date(),
         status: data.status ?? ReceiptStatus.DRAFT,
         notes: data.notes,
         totalAmount: data.totalAmount ?? 0,
+        attachments: data.attachments,
         companyId: data.companyId!,
         createdById: data.createdById!,
         items: {
@@ -88,13 +90,13 @@ export class GoodsReceiptRepository {
       where: { id },
       data: {
         ...(data.supplierName !== undefined && { supplierName: data.supplierName }),
-        ...(data.supplierReference !== undefined && { supplierReference: data.supplierReference }),
-        ...(data.warehouseId !== undefined && { warehouseId: data.warehouseId }),
+        ...(data.supplierPhone !== undefined && { supplierPhone: data.supplierPhone }),
+        ...(data.supplierEmail !== undefined && { supplierEmail: data.supplierEmail }),
+        ...(data.receiptDate !== undefined && { receiptDate: data.receiptDate }),
         ...(data.status !== undefined && { status: data.status }),
         ...(data.notes !== undefined && { notes: data.notes }),
         ...(data.totalAmount !== undefined && { totalAmount: data.totalAmount }),
-        ...(data.submittedById !== undefined && { submittedById: data.submittedById }),
-        ...(data.submittedAt !== undefined && { submittedAt: data.submittedAt }),
+        ...(data.attachments !== undefined && { attachments: data.attachments }),
         ...(data.approvedById !== undefined && { approvedById: data.approvedById }),
         ...(data.approvedAt !== undefined && { approvedAt: data.approvedAt }),
         ...(data.cancelledById !== undefined && { cancelledById: data.cancelledById }),
@@ -134,33 +136,33 @@ export class GoodsReceiptRepository {
     const lastReceipt = await this.prisma.goodsReceipt.findFirst({
       where: {
         companyId,
-        receiptNumber: { startsWith: prefix },
+        receiptNo: { startsWith: prefix },
       },
-      orderBy: { receiptNumber: 'desc' },
+      orderBy: { receiptNo: 'desc' },
     });
 
     if (!lastReceipt) {
       return `${prefix}00001`;
     }
 
-    const lastNumber = parseInt(lastReceipt.receiptNumber.split('-')[2], 10);
+    const lastNumber = parseInt(lastReceipt.receiptNo.split('-')[2], 10);
     return `${prefix}${String(lastNumber + 1).padStart(5, '0')}`;
   }
 
   private mapToEntity(receipt: any): GoodsReceipt {
     const entity = new GoodsReceipt();
     entity.id = receipt.id;
-    entity.receiptNumber = receipt.receiptNumber;
+    entity.receiptNo = receipt.receiptNo;
     entity.supplierName = receipt.supplierName;
-    entity.supplierReference = receipt.supplierReference;
-    entity.warehouseId = receipt.warehouseId;
+    entity.supplierPhone = receipt.supplierPhone;
+    entity.supplierEmail = receipt.supplierEmail;
+    entity.receiptDate = receipt.receiptDate;
     entity.status = receipt.status as ReceiptStatus;
     entity.notes = receipt.notes;
     entity.totalAmount = receipt.totalAmount;
+    entity.attachments = receipt.attachments;
     entity.companyId = receipt.companyId;
     entity.createdById = receipt.createdById;
-    entity.submittedById = receipt.submittedById;
-    entity.submittedAt = receipt.submittedAt;
     entity.approvedById = receipt.approvedById;
     entity.approvedAt = receipt.approvedAt;
     entity.cancelledById = receipt.cancelledById;

@@ -8,7 +8,7 @@ export class GoodsReceiptService {
   constructor(private readonly receiptRepository: GoodsReceiptRepository) {}
 
   async create(companyId: string, userId: string, dto: CreateGoodsReceiptDto): Promise<GoodsReceipt> {
-    const receiptNumber = await this.receiptRepository.generateReceiptNumber(companyId);
+    const receiptNo = await this.receiptRepository.generateReceiptNumber(companyId);
     
     const totalAmount = dto.items.reduce((sum, item) => sum + (item.quantity * item.unitCost), 0);
     
@@ -21,10 +21,11 @@ export class GoodsReceiptService {
     }));
 
     return this.receiptRepository.create({
-      receiptNumber,
+      receiptNo,
       supplierName: dto.supplierName,
-      supplierReference: dto.supplierReference,
-      warehouseId: dto.warehouseId,
+      supplierPhone: dto.supplierPhone,
+      supplierEmail: dto.supplierEmail,
+      receiptDate: dto.receiptDate ?? new Date(),
       notes: dto.notes,
       totalAmount,
       status: ReceiptStatus.DRAFT,
@@ -84,8 +85,8 @@ export class GoodsReceiptService {
       const updated = await this.receiptRepository.updateItems(id, items);
       return this.receiptRepository.update(id, {
         supplierName: dto.supplierName,
-        supplierReference: dto.supplierReference,
-        warehouseId: dto.warehouseId,
+        supplierPhone: dto.supplierPhone,
+        supplierEmail: dto.supplierEmail,
         notes: dto.notes,
         totalAmount,
       });
@@ -93,8 +94,8 @@ export class GoodsReceiptService {
 
     return this.receiptRepository.update(id, {
       supplierName: dto.supplierName,
-      supplierReference: dto.supplierReference,
-      warehouseId: dto.warehouseId,
+      supplierPhone: dto.supplierPhone,
+      supplierEmail: dto.supplierEmail,
       notes: dto.notes,
     });
   }
@@ -112,8 +113,6 @@ export class GoodsReceiptService {
 
     return this.receiptRepository.update(id, {
       status: ReceiptStatus.PENDING,
-      submittedById: userId,
-      submittedAt: new Date(),
     });
   }
 

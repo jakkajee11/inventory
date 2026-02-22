@@ -9,9 +9,8 @@ export enum IssueStatus {
 
 export enum IssueType {
   SALE = 'SALE',
-  PRODUCTION = 'PRODUCTION',
-  ADJUSTMENT = 'ADJUSTMENT',
-  TRANSFER = 'TRANSFER',
+  DAMAGE = 'DAMAGE',
+  INTERNAL = 'INTERNAL',
   OTHER = 'OTHER',
 }
 
@@ -46,19 +45,22 @@ export class GoodsIssue {
   id!: string;
 
   @ApiProperty()
-  issueNumber!: string;
+  issueNo!: string;
 
   @ApiProperty({ enum: IssueType })
   issueType!: IssueType;
 
   @ApiProperty({ required: false })
-  warehouseId?: string;
+  recipientName?: string;
 
   @ApiProperty({ required: false })
-  destination?: string;
+  recipientPhone?: string;
 
   @ApiProperty({ required: false })
-  reference?: string;
+  recipientEmail?: string;
+
+  @ApiProperty()
+  issueDate!: Date;
 
   @ApiProperty({ enum: IssueStatus })
   status!: IssueStatus;
@@ -69,17 +71,14 @@ export class GoodsIssue {
   @ApiProperty()
   totalAmount!: number;
 
+  @ApiProperty({ required: false })
+  attachments?: any;
+
   @ApiProperty()
   companyId!: string;
 
   @ApiProperty()
   createdById!: string;
-
-  @ApiProperty({ required: false })
-  submittedById?: string;
-
-  @ApiProperty({ required: false })
-  submittedAt?: Date;
 
   @ApiProperty({ required: false })
   approvedById?: string;

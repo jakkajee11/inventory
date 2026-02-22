@@ -10,7 +10,7 @@ export class GoodsIssueService {
   ) {}
 
   async create(companyId: string, userId: string, dto: CreateGoodsIssueDto): Promise<GoodsIssue> {
-    const issueNumber = await this.issueRepository.generateIssueNumber(companyId);
+    const issueNo = await this.issueRepository.generateIssueNumber(companyId);
 
     // Get current stock and average cost for each product to validate and calculate
     // This would integrate with ProductService and InventoryService
@@ -26,11 +26,12 @@ export class GoodsIssueService {
     const totalAmount = items.reduce((sum, item) => sum + item.totalCost, 0);
 
     return this.issueRepository.create({
-      issueNumber,
+      issueNo,
       issueType: dto.issueType,
-      warehouseId: dto.warehouseId,
-      destination: dto.destination,
-      reference: dto.reference,
+      recipientName: dto.recipientName,
+      recipientPhone: dto.recipientPhone,
+      recipientEmail: dto.recipientEmail,
+      issueDate: dto.issueDate ?? new Date(),
       notes: dto.notes,
       totalAmount,
       status: IssueStatus.DRAFT,
@@ -91,9 +92,9 @@ export class GoodsIssueService {
 
       return this.issueRepository.update(id, {
         issueType: dto.issueType,
-        warehouseId: dto.warehouseId,
-        destination: dto.destination,
-        reference: dto.reference,
+        recipientName: dto.recipientName,
+        recipientPhone: dto.recipientPhone,
+        recipientEmail: dto.recipientEmail,
         notes: dto.notes,
         totalAmount,
       });
@@ -101,9 +102,9 @@ export class GoodsIssueService {
 
     return this.issueRepository.update(id, {
       issueType: dto.issueType,
-      warehouseId: dto.warehouseId,
-      destination: dto.destination,
-      reference: dto.reference,
+      recipientName: dto.recipientName,
+      recipientPhone: dto.recipientPhone,
+      recipientEmail: dto.recipientEmail,
       notes: dto.notes,
     });
   }
@@ -124,8 +125,6 @@ export class GoodsIssueService {
 
     return this.issueRepository.update(id, {
       status: IssueStatus.PENDING,
-      submittedById: userId,
-      submittedAt: new Date(),
     });
   }
 

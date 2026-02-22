@@ -7,9 +7,9 @@ import {
   Inject,
   Optional,
   LoggerService,
+  ConsoleLogger,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { PinoLogger } from 'nestjs-pino';
 import { Prisma } from '@prisma/client';
 
 /**
@@ -75,12 +75,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
   constructor(
     @Optional()
     @Inject('EXCEPTION_LOGGER')
-    private readonly logger: LoggerService,
-  ) {
-    if (!this.logger) {
-      this.logger = new PinoLogger({});
-    }
-  }
+    private readonly logger: LoggerService = new ConsoleLogger(),
+  ) {}
 
   catch(exception: unknown, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
@@ -122,7 +118,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     // Handle validation errors (class-validator)
     if (this.isValidationError(exception)) {
-      return this.handleValidationError(exception, baseResponse);
+      return this.handleValidationError(exception as Error, baseResponse);
     }
 
     // Handle generic errors

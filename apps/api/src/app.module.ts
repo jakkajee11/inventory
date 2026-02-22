@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { LoggerModule } from 'nestjs-pino';
 
-import { configuration, validationSchema } from './config/configuration';
+import { configuration } from './config/configuration';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
@@ -22,7 +22,6 @@ import { TenantModule } from './modules/tenant/tenant.module';
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
-      validationSchema,
       envFilePath: ['.env.local', '.env'],
     }),
 

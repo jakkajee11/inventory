@@ -16,7 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { InventoryService, InventoryQuery, MovementQuery } from './inventory.service';
-import { MovementType, MovementStatus } from './domain/entities/stock-movement.entity';
+import { MovementType } from './domain/entities/stock-movement.entity';
 
 @ApiTags('inventory')
 @Controller('inventory')
@@ -46,7 +46,6 @@ export class InventoryController {
   @ApiQuery({ name: 'page', required: false, type: Number })
   @ApiQuery({ name: 'limit', required: false, type: Number })
   @ApiQuery({ name: 'type', required: false, enum: MovementType })
-  @ApiQuery({ name: 'status', required: false, enum: MovementStatus })
   @ApiResponse({ status: 200, description: 'Stock movements' })
   @ApiResponse({ status: 404, description: 'Product not found' })
   async getProductMovements(

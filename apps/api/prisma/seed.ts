@@ -1,4 +1,4 @@
-import { PrismaClient, Role, Permission } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -201,18 +201,28 @@ async function main() {
   for (const roleDef of roleDefinitions) {
     console.log(`Creating role: ${roleDef.name}`);
 
-    const role = await prisma.role.upsert({
+    // Find existing role by name or create new one
+    let role = await prisma.role.findFirst({
       where: { name: roleDef.name },
-      update: {
-        description: roleDef.description,
-        isSystem: roleDef.isSystem,
-      },
-      create: {
-        name: roleDef.name,
-        description: roleDef.description,
-        isSystem: roleDef.isSystem,
-      },
     });
+
+    if (!role) {
+      role = await prisma.role.create({
+        data: {
+          name: roleDef.name,
+          description: roleDef.description,
+          isSystem: roleDef.isSystem,
+        },
+      });
+    } else {
+      role = await prisma.role.update({
+        where: { id: role.id },
+        data: {
+          description: roleDef.description,
+          isSystem: roleDef.isSystem,
+        },
+      });
+    }
 
     // Create permissions for the role
     for (const permDef of roleDef.permissions) {

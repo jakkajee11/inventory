@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { InventoryRepositoryInterface } from '../domain/repositories/inventory.repository.interface';
-import { StockMovement, MovementType, MovementStatus } from '../domain/entities/stock-movement.entity';
+import { StockMovement, MovementType } from '../domain/entities/stock-movement.entity';
 
 @Injectable()
 export class InventoryRepository implements InventoryRepositoryInterface {
@@ -14,7 +14,6 @@ export class InventoryRepository implements InventoryRepositoryInterface {
       skip?: number;
       take?: number;
       type?: MovementType;
-      status?: MovementStatus;
       startDate?: Date;
       endDate?: Date;
     },
@@ -23,7 +22,6 @@ export class InventoryRepository implements InventoryRepositoryInterface {
       productId,
       companyId,
       ...(options?.type && { type: options.type }),
-      ...(options?.status && { status: options.status }),
       ...(options?.startDate && { createdAt: { gte: options.startDate } }),
       ...(options?.endDate && { createdAt: { lte: options.endDate } }),
     };
@@ -51,7 +49,7 @@ export class InventoryRepository implements InventoryRepositoryInterface {
     companyId: string,
   ): Promise<StockMovement | null> {
     const movement = await this.prisma.stockMovement.findFirst({
-      where: { productId, warehouseId, companyId, status: MovementStatus.COMPLETED },
+      where: { productId, warehouseId, companyId },
       orderBy: { createdAt: 'desc' },
     });
     return movement ? this.mapToEntity(movement) : null;
@@ -64,37 +62,15 @@ export class InventoryRepository implements InventoryRepositoryInterface {
         warehouseId: data.warehouseId!,
         type: data.type!,
         quantity: data.quantity!,
-        balanceBefore: data.balanceBefore ?? 0,
         balanceAfter: data.balanceAfter!,
         unitCost: data.unitCost ?? 0,
-        averageCostBefore: data.averageCostBefore ?? 0,
         averageCostAfter: data.averageCostAfter!,
-        status: data.status ?? MovementStatus.PENDING,
-        referenceType: data.referenceType,
-        referenceId: data.referenceId,
-        reason: data.reason,
+        referenceType: data.referenceType!,
+        referenceId: data.referenceId!,
+        referenceNo: data.referenceNo!,
         notes: data.notes,
         companyId: data.companyId!,
-        createdBy: data.createdBy!,
-      },
-      include: { product: true },
-    });
-    return this.mapToEntity(movement);
-  }
-
-  async updateMovementStatus(
-    id: string,
-    status: MovementStatus,
-    approvedBy?: string,
-  ): Promise<StockMovement> {
-    const movement = await this.prisma.stockMovement.update({
-      where: { id },
-      data: {
-        status,
-        ...(status === MovementStatus.COMPLETED && {
-          approvedBy,
-          approvedAt: new Date(),
-        }),
+        userId: data.userId!,
       },
       include: { product: true },
     });
@@ -129,8 +105,8 @@ export class InventoryRepository implements InventoryRepositoryInterface {
         productSku: product.sku,
         productName: product.name,
         currentStock: product.currentStock,
-        averageCost: product.averageCost,
-        totalValue: product.currentStock * product.averageCost,
+        averageCost: Number(product.averageCost),
+        totalValue: product.currentStock * Number(product.averageCost),
         minStock: product.minStock,
         isLowStock,
         category: product.category,
@@ -146,20 +122,15 @@ export class InventoryRepository implements InventoryRepositoryInterface {
     entity.warehouseId = movement.warehouseId;
     entity.type = movement.type as MovementType;
     entity.quantity = movement.quantity;
-    entity.balanceBefore = movement.balanceBefore;
     entity.balanceAfter = movement.balanceAfter;
     entity.unitCost = movement.unitCost;
-    entity.averageCostBefore = movement.averageCostBefore;
     entity.averageCostAfter = movement.averageCostAfter;
-    entity.status = movement.status as MovementStatus;
     entity.referenceType = movement.referenceType;
     entity.referenceId = movement.referenceId;
-    entity.reason = movement.reason;
+    entity.referenceNo = movement.referenceNo;
     entity.notes = movement.notes;
     entity.companyId = movement.companyId;
-    entity.createdBy = movement.createdBy;
-    entity.approvedBy = movement.approvedBy;
-    entity.approvedAt = movement.approvedAt;
+    entity.userId = movement.userId;
     entity.createdAt = movement.createdAt;
     entity.product = movement.product;
     return entity;

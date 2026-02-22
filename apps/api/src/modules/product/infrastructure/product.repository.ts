@@ -45,9 +45,9 @@ export class ProductRepository implements ProductRepositoryInterface {
       ...(options?.categoryId ? { categoryId: options.categoryId } : {}),
       ...(options?.search ? {
         OR: [
-          { sku: { contains: options.search, mode: 'insensitive' } },
-          { name: { contains: options.search, mode: 'insensitive' } },
-          { barcode: { contains: options.search, mode: 'insensitive' } },
+          { sku: { contains: options.search, mode: 'insensitive' as const } },
+          { name: { contains: options.search, mode: 'insensitive' as const } },
+          { barcode: { contains: options.search, mode: 'insensitive' as const } },
         ],
       } : {}),
     };
@@ -79,7 +79,7 @@ export class ProductRepository implements ProductRepositoryInterface {
         sellingPrice: data.sellingPrice || 0,
         minStock: data.minStock || 0,
         maxStock: data.maxStock,
-        imageUrl: data.imageUrl,
+        images: data.images,
         companyId: data.companyId!,
         isActive: data.isActive ?? true,
       },
@@ -101,7 +101,7 @@ export class ProductRepository implements ProductRepositoryInterface {
         ...(data.sellingPrice !== undefined && { sellingPrice: data.sellingPrice }),
         ...(data.minStock !== undefined && { minStock: data.minStock }),
         ...(data.maxStock !== undefined && { maxStock: data.maxStock }),
-        ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
+        ...(data.images !== undefined && { images: data.images }),
         ...(data.isActive !== undefined && { isActive: data.isActive }),
         version: { increment: 1 },
       },
@@ -157,7 +157,7 @@ export class ProductRepository implements ProductRepositoryInterface {
     entity.maxStock = product.maxStock;
     entity.currentStock = product.currentStock;
     entity.averageCost = product.averageCost;
-    entity.imageUrl = product.imageUrl;
+    entity.images = product.images;
     entity.isActive = product.isActive;
     entity.version = product.version;
     entity.companyId = product.companyId;

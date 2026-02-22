@@ -1,4 +1,4 @@
-import { StockMovement, MovementType, MovementStatus } from '../entities/stock-movement.entity';
+import { StockMovement, MovementType } from '../entities/stock-movement.entity';
 
 export interface InventoryRepositoryInterface {
   findMovementsByProduct(
@@ -8,7 +8,6 @@ export interface InventoryRepositoryInterface {
       skip?: number;
       take?: number;
       type?: MovementType;
-      status?: MovementStatus;
       startDate?: Date;
       endDate?: Date;
     },
@@ -21,12 +20,6 @@ export interface InventoryRepositoryInterface {
   ): Promise<StockMovement | null>;
 
   createMovement(data: Partial<StockMovement>): Promise<StockMovement>;
-
-  updateMovementStatus(
-    id: string,
-    status: MovementStatus,
-    approvedBy?: string,
-  ): Promise<StockMovement>;
 
   getInventorySummary(
     companyId: string,

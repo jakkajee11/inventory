@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InventoryRepository } from './infrastructure/inventory.repository';
 import { StockCalculatorService } from './stock-calculator.service';
-import { StockMovement, MovementType, MovementStatus } from './domain/entities/stock-movement.entity';
+import { StockMovement, MovementType } from './domain/entities/stock-movement.entity';
 
 export interface InventoryQuery {
   page?: number;
@@ -15,7 +15,6 @@ export interface MovementQuery {
   page?: number;
   limit?: number;
   type?: MovementType;
-  status?: MovementStatus;
   startDate?: Date;
   endDate?: Date;
 }
@@ -65,7 +64,6 @@ export class InventoryService {
         skip,
         take: limit,
         type: query.type,
-        status: query.status,
         startDate: query.startDate,
         endDate: query.endDate,
       },
@@ -88,7 +86,7 @@ export class InventoryService {
     let balanceAfter: number;
     let averageCostAfter: number;
 
-    if ([MovementType.RECEIPT, MovementType.ADJUSTMENT_IN, MovementType.TRANSFER_IN].includes(data.type!)) {
+    if (data.type === MovementType.IN || data.type === MovementType.ADJUST) {
       const result = this.stockCalculator.calculateWeightedAverage({
         currentStock,
         currentAverageCost,
@@ -116,9 +114,7 @@ export class InventoryService {
 
     return this.inventoryRepository.createMovement({
       ...data,
-      balanceBefore: currentStock,
       balanceAfter,
-      averageCostBefore: currentAverageCost,
       averageCostAfter,
     });
   }

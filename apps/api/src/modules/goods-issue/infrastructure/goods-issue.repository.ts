@@ -54,14 +54,16 @@ export class GoodsIssueRepository {
   async create(data: Partial<GoodsIssue>, items: Partial<GoodsIssueItem>[]): Promise<GoodsIssue> {
     const issue = await this.prisma.goodsIssue.create({
       data: {
-        issueNumber: data.issueNumber!,
+        issueNo: data.issueNo!,
         issueType: data.issueType!,
-        warehouseId: data.warehouseId,
-        destination: data.destination,
-        reference: data.reference,
+        recipientName: data.recipientName,
+        recipientPhone: data.recipientPhone,
+        recipientEmail: data.recipientEmail,
+        issueDate: data.issueDate ?? new Date(),
         status: data.status ?? IssueStatus.DRAFT,
         notes: data.notes,
         totalAmount: data.totalAmount ?? 0,
+        attachments: data.attachments,
         companyId: data.companyId!,
         createdById: data.createdById!,
         items: {
@@ -84,14 +86,14 @@ export class GoodsIssueRepository {
       where: { id },
       data: {
         ...(data.issueType !== undefined && { issueType: data.issueType }),
-        ...(data.warehouseId !== undefined && { warehouseId: data.warehouseId }),
-        ...(data.destination !== undefined && { destination: data.destination }),
-        ...(data.reference !== undefined && { reference: data.reference }),
+        ...(data.recipientName !== undefined && { recipientName: data.recipientName }),
+        ...(data.recipientPhone !== undefined && { recipientPhone: data.recipientPhone }),
+        ...(data.recipientEmail !== undefined && { recipientEmail: data.recipientEmail }),
+        ...(data.issueDate !== undefined && { issueDate: data.issueDate }),
         ...(data.status !== undefined && { status: data.status }),
         ...(data.notes !== undefined && { notes: data.notes }),
         ...(data.totalAmount !== undefined && { totalAmount: data.totalAmount }),
-        ...(data.submittedById !== undefined && { submittedById: data.submittedById }),
-        ...(data.submittedAt !== undefined && { submittedAt: data.submittedAt }),
+        ...(data.attachments !== undefined && { attachments: data.attachments }),
         ...(data.approvedById !== undefined && { approvedById: data.approvedById }),
         ...(data.approvedAt !== undefined && { approvedAt: data.approvedAt }),
         ...(data.cancelledById !== undefined && { cancelledById: data.cancelledById }),
@@ -131,34 +133,34 @@ export class GoodsIssueRepository {
     const lastIssue = await this.prisma.goodsIssue.findFirst({
       where: {
         companyId,
-        issueNumber: { startsWith: prefix },
+        issueNo: { startsWith: prefix },
       },
-      orderBy: { issueNumber: 'desc' },
+      orderBy: { issueNo: 'desc' },
     });
 
     if (!lastIssue) {
       return `${prefix}00001`;
     }
 
-    const lastNumber = parseInt(lastIssue.issueNumber.split('-')[2], 10);
+    const lastNumber = parseInt(lastIssue.issueNo.split('-')[2], 10);
     return `${prefix}${String(lastNumber + 1).padStart(5, '0')}`;
   }
 
   private mapToEntity(issue: any): GoodsIssue {
     const entity = new GoodsIssue();
     entity.id = issue.id;
-    entity.issueNumber = issue.issueNumber;
+    entity.issueNo = issue.issueNo;
     entity.issueType = issue.issueType as IssueType;
-    entity.warehouseId = issue.warehouseId;
-    entity.destination = issue.destination;
-    entity.reference = issue.reference;
+    entity.recipientName = issue.recipientName;
+    entity.recipientPhone = issue.recipientPhone;
+    entity.recipientEmail = issue.recipientEmail;
+    entity.issueDate = issue.issueDate;
     entity.status = issue.status as IssueStatus;
     entity.notes = issue.notes;
     entity.totalAmount = issue.totalAmount;
+    entity.attachments = issue.attachments;
     entity.companyId = issue.companyId;
     entity.createdById = issue.createdById;
-    entity.submittedById = issue.submittedById;
-    entity.submittedAt = issue.submittedAt;
     entity.approvedById = issue.approvedById;
     entity.approvedAt = issue.approvedAt;
     entity.cancelledById = issue.cancelledById;

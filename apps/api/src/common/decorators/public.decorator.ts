@@ -19,11 +19,11 @@ export const IS_PUBLIC_KEY = 'isPublic';
  *   return { status: 'ok' };
  * }
  */
-export const Public = (): MethodDecorator & ClassDecorator => {
+export function Public(): any {
   return (
-    target: unknown,
+    target: any,
     key?: string | symbol,
-    descriptor?: TypedPropertyDescriptor<unknown>,
+    descriptor?: TypedPropertyDescriptor<any>,
   ) => {
     if (descriptor) {
       Reflect.defineMetadata(IS_PUBLIC_KEY, true, descriptor.value);
@@ -31,6 +31,6 @@ export const Public = (): MethodDecorator & ClassDecorator => {
     }
     // Class decorator
     Reflect.defineMetadata(IS_PUBLIC_KEY, true, target);
-    return target as new (...args: unknown[]) => unknown;
+    return target;
   };
-};
+}

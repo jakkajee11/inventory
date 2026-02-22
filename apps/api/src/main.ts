@@ -4,12 +4,12 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestFastifyApplication>(
+  try {
+    const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter({
       logger: false,
@@ -47,18 +47,6 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Swagger documentation
-  if (process.env.NODE_ENV !== 'production') {
-    const config = new DocumentBuilder()
-      .setTitle('Inventory Management API')
-      .setDescription('API documentation for Inventory Management System')
-      .setVersion('1.0')
-      .addBearerAuth()
-      .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api/docs', app, document);
-  }
-
   // Global prefix
   app.setGlobalPrefix('api');
 
@@ -68,6 +56,13 @@ async function bootstrap() {
   const logger = app.get(Logger);
   logger.log(`Application is running on: http://localhost:${port}`);
   logger.log(`Swagger docs: http://localhost:${port}/api/docs`);
+  } catch (error) {
+    console.error('Failed to start application:', error);
+    process.exit(1);
+  }
 }
 
-bootstrap();
+bootstrap().catch((error) => {
+  console.error('Bootstrap failed:', error);
+  process.exit(1);
+});

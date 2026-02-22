@@ -8,10 +8,9 @@ export enum AdjustmentStatus {
 }
 
 export enum AdjustmentType {
-  INVENTORY_COUNT = 'INVENTORY_COUNT',
+  COUNT = 'COUNT',
   DAMAGE = 'DAMAGE',
-  THEFT = 'THEFT',
-  EXPIRATION = 'EXPIRATION',
+  RETURN = 'RETURN',
   OTHER = 'OTHER',
 }
 
@@ -32,16 +31,16 @@ export class StockAdjustmentItem {
   quantityAfter!: number;
 
   @ApiProperty()
-  adjustment!: number;
+  quantityDiff!: number;
 
   @ApiProperty()
   unitCost!: number;
 
   @ApiProperty()
-  valueChange!: number;
+  totalCost!: number;
 
   @ApiProperty({ required: false })
-  reason?: string;
+  notes?: string;
 
   @ApiProperty({ required: false })
   product?: any;
@@ -52,13 +51,13 @@ export class StockAdjustment {
   id!: string;
 
   @ApiProperty()
-  adjustmentNumber!: string;
+  adjustmentNo!: string;
 
   @ApiProperty({ enum: AdjustmentType })
   adjustmentType!: AdjustmentType;
 
-  @ApiProperty({ required: false })
-  warehouseId?: string;
+  @ApiProperty()
+  adjustmentDate!: Date;
 
   @ApiProperty({ enum: AdjustmentStatus })
   status!: AdjustmentStatus;
@@ -67,7 +66,10 @@ export class StockAdjustment {
   notes?: string;
 
   @ApiProperty()
-  totalValueChange!: number;
+  totalAmount!: number;
+
+  @ApiProperty({ required: false })
+  attachments?: any;
 
   @ApiProperty()
   companyId!: string;

@@ -35,20 +35,24 @@ class GoodsReceiptItemDto {
 }
 
 export class CreateGoodsReceiptDto {
-  @ApiProperty({ description: 'Supplier name', required: false })
+  @ApiProperty({ description: 'Supplier name' })
+  @IsString()
+  @IsNotEmpty()
+  supplierName: string;
+
+  @ApiProperty({ description: 'Supplier phone', required: false })
   @IsString()
   @IsOptional()
-  supplierName?: string;
+  supplierPhone?: string;
 
-  @ApiProperty({ description: 'Supplier reference', required: false })
+  @ApiProperty({ description: 'Supplier email', required: false })
   @IsString()
   @IsOptional()
-  supplierReference?: string;
+  supplierEmail?: string;
 
-  @ApiProperty({ description: 'Warehouse ID', required: false })
-  @IsUUID()
+  @ApiProperty({ description: 'Receipt date', required: false })
   @IsOptional()
-  warehouseId?: string;
+  receiptDate?: Date;
 
   @ApiProperty({ description: 'Notes', required: false })
   @IsString()

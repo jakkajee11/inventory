@@ -1,18 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export enum MovementType {
-  RECEIPT = 'RECEIPT',
-  ISSUE = 'ISSUE',
-  ADJUSTMENT_IN = 'ADJUSTMENT_IN',
-  ADJUSTMENT_OUT = 'ADJUSTMENT_OUT',
-  TRANSFER_IN = 'TRANSFER_IN',
-  TRANSFER_OUT = 'TRANSFER_OUT',
-}
-
-export enum MovementStatus {
-  PENDING = 'PENDING',
-  COMPLETED = 'COMPLETED',
-  CANCELLED = 'CANCELLED',
+  IN = 'IN',
+  OUT = 'OUT',
+  ADJUST = 'ADJUST',
 }
 
 export class StockMovement {
@@ -32,31 +23,22 @@ export class StockMovement {
   quantity!: number;
 
   @ApiProperty()
-  balanceBefore!: number;
-
-  @ApiProperty()
   balanceAfter!: number;
 
   @ApiProperty()
   unitCost!: number;
 
   @ApiProperty()
-  averageCostBefore!: number;
-
-  @ApiProperty()
   averageCostAfter!: number;
 
-  @ApiProperty({ enum: MovementStatus })
-  status!: MovementStatus;
+  @ApiProperty()
+  referenceType!: string;
 
-  @ApiProperty({ required: false })
-  referenceType?: string;
+  @ApiProperty()
+  referenceId!: string;
 
-  @ApiProperty({ required: false })
-  referenceId?: string;
-
-  @ApiProperty({ required: false })
-  reason?: string;
+  @ApiProperty()
+  referenceNo!: string;
 
   @ApiProperty({ required: false })
   notes?: string;
@@ -65,13 +47,7 @@ export class StockMovement {
   companyId!: string;
 
   @ApiProperty()
-  createdBy!: string;
-
-  @ApiProperty({ required: false })
-  approvedBy?: string;
-
-  @ApiProperty({ required: false })
-  approvedAt?: Date;
+  userId!: string;
 
   @ApiProperty()
   createdAt!: Date;
