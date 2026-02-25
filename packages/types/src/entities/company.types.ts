@@ -2,15 +2,7 @@
  * Company and Tenant type definitions
  */
 
-/**
- * Company status
- */
-export type CompanyStatus = 'trial' | 'active' | 'suspended' | 'cancelled';
-
-/**
- * Subscription plan
- */
-export type SubscriptionPlan = 'starter' | 'professional' | 'enterprise';
+import { CompanyStatus, SubscriptionPlan } from '../enums/status.enums';
 
 /**
  * Company settings

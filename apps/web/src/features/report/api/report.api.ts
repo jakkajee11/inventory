@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import type { StockReportResponse, MovementReportResponse } from '../types/report.types';
 
 export const reportKeys = {
@@ -42,7 +42,7 @@ export function useMovementReport(params: { startDate?: string; endDate?: string
   });
 }
 
-export function getStockReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) => {
+export function getStockReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value) searchParams.append(key, value.toString());
@@ -56,4 +56,14 @@ export function getMovementReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', para
     if (value) searchParams.append(key, value.toString());
   });
   return `${apiClient.defaults.baseURL}/reports/movements/export/${format}?${searchParams.toString()}`;
+}
+
+export function exportStockReport(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) {
+  const url = getStockReportExportUrl(format, params);
+  window.open(url, '_blank');
+}
+
+export function exportMovementReport(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) {
+  const url = getMovementReportExportUrl(format, params);
+  window.open(url, '_blank');
 }
