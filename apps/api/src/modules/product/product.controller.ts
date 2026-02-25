@@ -11,7 +11,10 @@ import {
   Request,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiTags,
   ApiOperation,
@@ -19,9 +22,12 @@ import {
   ApiBearerAuth,
   ApiParam,
   ApiQuery,
+  ApiConsumes,
+  ApiBody,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { ProductService } from './product.service';
+import { ProductImportService } from './product-import.service';
 import { CreateProductDto, UpdateProductDto, ProductQueryDto } from './application/dtos/product.dto';
 import { Product } from './domain/entities/product.entity';
 
@@ -30,7 +36,10 @@ import { Product } from './domain/entities/product.entity';
 @UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth()
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly productImportService: ProductImportService,
+  ) {}
 
   @Get()
   @ApiOperation({ summary: 'Get all products' })
@@ -105,5 +114,42 @@ export class ProductController {
     @Request() req: { user: { companyId: string } },
   ): Promise<void> {
     return this.productService.delete(id, req.user.companyId);
+  }
+
+  @Post('import')
+  @ApiOperation({ summary: 'Import products from Excel or CSV file' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+          description: 'Excel (.xlsx) or CSV file with product data',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Import result with success count and errors' })
+  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Invalid file or no data' })
+  @UseInterceptors(FileInterceptor('file'))
+  async importProducts(
+    @UploadedFile() file: Express.Multer.File,
+    @Request() req: { user: { companyId: string } },
+  ) {
+    if (!file) {
+      return { successCount: 0, errorCount: 1, errors: [{ row: 0, field: 'file', message: 'No file provided' }], totalRows: 0 };
+    }
+
+    const fileType = file.originalname.endsWith('.csv') ? 'csv' : 'xlsx';
+    return this.productImportService.importFromBuffer(file.buffer, req.user.companyId, fileType);
+  }
+
+  @Get('import/template')
+  @ApiOperation({ summary: 'Download product import template' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Excel template file' })
+  async getImportTemplate(): Promise<Buffer> {
+    return this.productImportService.generateImportTemplate();
   }
 }

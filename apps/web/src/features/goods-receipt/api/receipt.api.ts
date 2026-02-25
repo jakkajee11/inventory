@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
-import type { GoodsReceipt, CreateReceiptDto, ReceiptListResponse } from '../types/receipt.types';
+import apiClient from '@/lib/api/api-client';
+import type { GoodsReceipt, CreateReceiptDto, UpdateReceiptDto, ReceiptListResponse } from '../types/receipt.types';
 
 export const receiptKeys = {
   all: ['receipts'] as const,
@@ -36,11 +36,39 @@ export function useReceipt(id: string) {
 
 export function useCreateReceipt() {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: async (dto: CreateReceiptDto) => {
       const { data } = await apiClient.post('/goods-receipts', dto);
       return data as GoodsReceipt;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: receiptKeys.lists() });
+    },
+  });
+}
+
+export function useUpdateReceipt() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ id, data: dto }: { id: string; data: UpdateReceiptDto }) => {
+      const { data } = await apiClient.put(`/goods-receipts/${id}`, dto);
+      return data as GoodsReceipt;
+    },
+    onSuccess: (_, { id }) => {
+      queryClient.invalidateQueries({ queryKey: receiptKeys.detail(id) });
+      queryClient.invalidateQueries({ queryKey: receiptKeys.lists() });
+    },
+  });
+}
+
+export function useDeleteReceipt() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id: string) => {
+      await apiClient.delete(`/goods-receipts/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: receiptKeys.lists() });

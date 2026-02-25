@@ -24,6 +24,10 @@
       "dependsOn": ["^build"],
       "outputs": ["coverage/**"]
     },
+    "type-check": {
+      "dependsOn": ["^type-check"],
+      "outputs": []
+    },
     "clean": {
       "cache": false
     },

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ReceiptForm } from '@/features/goods-receipt/components/ReceiptForm';
 import { useCreateReceipt } from '@/features/goods-receipt/api/receipt.api';
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';

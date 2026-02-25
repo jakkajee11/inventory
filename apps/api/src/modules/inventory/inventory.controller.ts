@@ -5,6 +5,7 @@ import {
   Param,
   UseGuards,
   Request,
+  Res,
 } from '@nestjs/common';
 import {
   ApiTags,
@@ -15,7 +16,9 @@ import {
   ApiParam,
 } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
+import { Response } from 'express';
 import { InventoryService, InventoryQuery, MovementQuery } from './inventory.service';
+import { InventoryExportService, ExportFilter } from './inventory-export.service';
 import { MovementType } from './domain/entities/stock-movement.entity';
 
 @ApiTags('inventory')
@@ -23,7 +26,10 @@ import { MovementType } from './domain/entities/stock-movement.entity';
 @UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth()
 export class InventoryController {
-  constructor(private readonly inventoryService: InventoryService) {}
+  constructor(
+    private readonly inventoryService: InventoryService,
+    private readonly inventoryExportService: InventoryExportService,
+  ) {}
 
   @Get()
   @ApiOperation({ summary: 'Get inventory summary' })
@@ -58,5 +64,43 @@ export class InventoryController {
       req.user.companyId,
       query,
     );
+  }
+
+  @Get('export/csv')
+  @ApiOperation({ summary: 'Export inventory to CSV' })
+  @ApiQuery({ name: 'categoryId', required: false, type: String })
+  @ApiQuery({ name: 'warehouseId', required: false, type: String })
+  @ApiQuery({ name: 'lowStockOnly', required: false, type: Boolean })
+  @ApiQuery({ name: 'includeInactive', required: false, type: Boolean })
+  @ApiResponse({ status: 200, description: 'CSV file with inventory data' })
+  async exportToCSV(
+    @Request() req: { user: { companyId: string } },
+    @Query() query: ExportFilter,
+    @Res() res: Response,
+  ) {
+    const buffer = await this.inventoryExportService.exportToCSV(req.user.companyId, query);
+
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename="inventory-${new Date().toISOString().split('T')[0]}.csv"`);
+    res.send(buffer);
+  }
+
+  @Get('export/excel')
+  @ApiOperation({ summary: 'Export inventory to Excel' })
+  @ApiQuery({ name: 'categoryId', required: false, type: String })
+  @ApiQuery({ name: 'warehouseId', required: false, type: String })
+  @ApiQuery({ name: 'lowStockOnly', required: false, type: Boolean })
+  @ApiQuery({ name: 'includeInactive', required: false, type: Boolean })
+  @ApiResponse({ status: 200, description: 'Excel file with inventory data' })
+  async exportToExcel(
+    @Request() req: { user: { companyId: string } },
+    @Query() query: ExportFilter,
+    @Res() res: Response,
+  ) {
+    const buffer = await this.inventoryExportService.exportToExcel(req.user.companyId, query);
+
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="inventory-${new Date().toISOString().split('T')[0]}.xlsx"`);
+    res.send(buffer);
   }
 }

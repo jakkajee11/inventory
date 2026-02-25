@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import { AdjustmentForm } from '@/features/stock-adjustment/components/AdjustmentForm';
 import { useCreateAdjustment } from '@/features/stock-adjustment/api/adjustment.api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

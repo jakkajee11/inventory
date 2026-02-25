@@ -3,7 +3,6 @@
 import { use, Suspense, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useProductMovements } from '@/features/inventory/api/inventory.api';
 import { ArrowLeft } from 'lucide-react';

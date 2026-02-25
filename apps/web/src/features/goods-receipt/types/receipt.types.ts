@@ -42,6 +42,20 @@ export interface CreateReceiptDto {
   items: CreateReceiptItemDto[];
 }
 
+export interface UpdateReceiptItemDto {
+  productId: string;
+  quantity: number;
+  unitCost: number;
+  notes?: string;
+}
+
+export interface UpdateReceiptDto {
+  supplierName?: string;
+  warehouseId?: string;
+  notes?: string;
+  items?: UpdateReceiptItemDto[];
+}
+
 export interface ReceiptListResponse {
   receipts: GoodsReceipt[];
   pagination: {

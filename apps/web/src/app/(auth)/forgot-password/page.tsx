@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');

@@ -1,6 +1,29 @@
 import { PrismaClient } from '@prisma/client';
+import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
+
+// Default admin credentials
+const DEFAULT_ADMIN = {
+  email: 'admin@open-inventory.app',
+  password: '!Adm!N2026',
+  name: 'Administrator',
+};
+
+// Default company settings
+const DEFAULT_COMPANY = {
+  name: 'Open Inventory',
+  taxId: 'TH-0000000000000',
+  currency: 'THB',
+  timezone: 'Asia/Bangkok',
+};
+
+// Default warehouse settings
+const DEFAULT_WAREHOUSE = {
+  code: 'WH-001',
+  name: 'Main Warehouse',
+  isDefault: true,
+};
 
 // Role definitions with their permissions
 const roleDefinitions = [
@@ -247,6 +270,111 @@ async function main() {
     }
 
     console.log(`Created ${roleDef.permissions.length} permissions for role: ${roleDef.name}`);
+  }
+
+  // Create default company
+  console.log(`Creating default company: ${DEFAULT_COMPANY.name}`);
+  let company = await prisma.company.findFirst({
+    where: { name: DEFAULT_COMPANY.name },
+  });
+
+  if (!company) {
+    company = await prisma.company.create({
+      data: {
+        name: DEFAULT_COMPANY.name,
+        taxId: DEFAULT_COMPANY.taxId,
+        currency: DEFAULT_COMPANY.currency,
+        timezone: DEFAULT_COMPANY.timezone,
+        settings: {
+          lowStockThreshold: 10,
+          enableNotifications: true,
+          defaultWarehouseId: null,
+        },
+      },
+    });
+  } else {
+    company = await prisma.company.update({
+      where: { id: company.id },
+      data: {
+        currency: DEFAULT_COMPANY.currency,
+        timezone: DEFAULT_COMPANY.timezone,
+      },
+    });
+  }
+  console.log(`Company created: ${company.id}`);
+
+  // Create default warehouse
+  console.log(`Creating default warehouse: ${DEFAULT_WAREHOUSE.name}`);
+  const warehouse = await prisma.warehouse.upsert({
+    where: {
+      companyId_code: {
+        companyId: company.id,
+        code: DEFAULT_WAREHOUSE.code,
+      },
+    },
+    update: {
+      name: DEFAULT_WAREHOUSE.name,
+      isDefault: DEFAULT_WAREHOUSE.isDefault,
+    },
+    create: {
+      companyId: company.id,
+      code: DEFAULT_WAREHOUSE.code,
+      name: DEFAULT_WAREHOUSE.name,
+      isDefault: DEFAULT_WAREHOUSE.isDefault,
+    },
+  });
+  console.log(`Warehouse created: ${warehouse.id}`);
+
+  // Update company settings with default warehouse
+  await prisma.company.update({
+    where: { id: company.id },
+    data: {
+      settings: {
+        lowStockThreshold: 10,
+        enableNotifications: true,
+        defaultWarehouseId: warehouse.id,
+      },
+    },
+  });
+
+  // Get Admin role
+  const adminRole = await prisma.role.findFirst({
+    where: { name: 'Admin' },
+  });
+
+  if (!adminRole) {
+    throw new Error('Admin role not found. Please ensure roles are created first.');
+  }
+
+  // Check if admin user already exists
+  const existingAdmin = await prisma.user.findUnique({
+    where: {
+      companyId_email: {
+        companyId: company.id,
+        email: DEFAULT_ADMIN.email,
+      },
+    },
+  });
+
+  if (existingAdmin) {
+    console.log(`Admin user already exists: ${DEFAULT_ADMIN.email}`);
+  } else {
+    // Create admin user
+    console.log(`Creating admin user: ${DEFAULT_ADMIN.email}`);
+    const passwordHash = await bcrypt.hash(DEFAULT_ADMIN.password, 10);
+
+    const adminUser = await prisma.user.create({
+      data: {
+        email: DEFAULT_ADMIN.email,
+        passwordHash: passwordHash,
+        name: DEFAULT_ADMIN.name,
+        roleId: adminRole.id,
+        companyId: company.id,
+        warehouseId: warehouse.id,
+        isActive: true,
+      },
+    });
+    console.log(`Admin user created: ${adminUser.id}`);
   }
 
   console.log('Seed completed successfully!');

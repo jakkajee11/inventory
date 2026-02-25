@@ -22,17 +22,33 @@ export const useAuth = () => {
   }, [currentUser, user, setAuth, token]);
 
   const login = async (credentials: LoginCredentials) => {
-    const response = await loginMutation.mutateAsync(credentials);
-    setAuth(response.user, response.accessToken);
-    router.push('/dashboard');
-    return response;
+    try {
+      const response = await loginMutation.mutateAsync(credentials);
+      // Ensure token is saved to localStorage before redirect
+      localStorage.setItem('auth-token', response.accessToken);
+      setAuth(response.user, response.accessToken);
+      // Small delay to ensure state is saved
+      await new Promise(resolve => setTimeout(resolve, 100));
+      router.push('/');
+      router.refresh();
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const register = async (data: RegisterData) => {
-    const response = await registerMutation.mutateAsync(data);
-    setAuth(response.user, response.accessToken);
-    router.push('/dashboard');
-    return response;
+    try {
+      const response = await registerMutation.mutateAsync(data);
+      localStorage.setItem('auth-token', response.accessToken);
+      setAuth(response.user, response.accessToken);
+      await new Promise(resolve => setTimeout(resolve, 100));
+      router.push('/');
+      router.refresh();
+      return response;
+    } catch (error) {
+      throw error;
+    }
   };
 
   const logout = async () => {

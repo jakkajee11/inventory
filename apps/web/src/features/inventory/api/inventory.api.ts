@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import type { InventoryFilters, InventoryListResponse, MovementHistoryResponse } from '../types/inventory.types';
 
 export const inventoryKeys = {

@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { ScheduleModule } from '@nestjs/schedule';
 import { LoggerModule } from 'nestjs-pino';
 
 import { configuration } from './config/configuration';
@@ -15,6 +16,7 @@ import { StockAdjustmentModule } from './modules/stock-adjustment/stock-adjustme
 import { NotificationModule } from './modules/notification/notification.module';
 import { ReportModule } from './modules/report/report.module';
 import { TenantModule } from './modules/tenant/tenant.module';
+import { HealthModule } from './common/modules/health.module';
 
 @Module({
   imports: [
@@ -24,6 +26,9 @@ import { TenantModule } from './modules/tenant/tenant.module';
       load: [configuration],
       envFilePath: ['.env.local', '.env'],
     }),
+
+    // Scheduling
+    ScheduleModule.forRoot(),
 
     // Logging
     LoggerModule.forRootAsync({
@@ -52,6 +57,7 @@ import { TenantModule } from './modules/tenant/tenant.module';
     PrismaModule,
 
     // Feature modules
+    HealthModule,
     TenantModule,
     AuthModule,
     UserModule,

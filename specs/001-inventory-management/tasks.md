@@ -127,10 +127,10 @@
 
 ### Tests for User Story 7 (TDD)
 
-- [ ] T055 [P] [US7] Create test for password hashing in apps/api/test/auth/password.spec.ts
-- [ ] T056 [P] [US7] Create test for JWT token generation in apps/api/test/auth/jwt.spec.ts
-- [ ] T057 [P] [US7] Create test for role-based access control in apps/api/test/auth/rbac.spec.ts
-- [ ] T058 [P] [US7] Create E2E test for login flow in apps/api/test/auth/login.e2e-spec.ts
+- [x] T055 [P] [US7] Create test for password hashing in apps/api/test/auth/password.spec.ts
+- [x] T056 [P] [US7] Create test for JWT token generation in apps/api/test/auth/jwt.spec.ts
+- [x] T057 [P] [US7] Create test for role-based access control in apps/api/test/auth/rbac.spec.ts
+- [x] T058 [P] [US7] Create E2E test for login flow in apps/api/test/auth/login.e2e-spec.ts
 
 ### Backend Implementation for User Story 7
 
@@ -173,10 +173,10 @@
 
 ### Tests for User Story 1 (TDD)
 
-- [ ] T082 [P] [US1] Create test for SKU uniqueness validation in apps/api/test/product/sku.spec.ts
-- [ ] T083 [P] [US1] Create test for hierarchical categories in apps/api/test/product/category.spec.ts
-- [ ] T084 [P] [US1] Create test for unit conversions in apps/api/test/product/unit.spec.ts
-- [ ] T085 [P] [US1] Create E2E test for product CRUD in apps/api/test/product/product.e2e-spec.ts
+- [x] T082 [P] [US1] Create test for SKU uniqueness validation in apps/api/test/product/sku.spec.ts
+- [x] T083 [P] [US1] Create test for hierarchical categories in apps/api/test/product/category.spec.ts
+- [x] T084 [P] [US1] Create test for unit conversions in apps/api/test/product/unit.spec.ts
+- [x] T085 [P] [US1] Create E2E test for product CRUD in apps/api/test/product/product.e2e-spec.ts
 
 ### Backend Implementation for User Story 1
 
@@ -188,7 +188,7 @@
 - [x] T091 [US1] Create ProductDtos (Create, Update, Response, Query) in apps/api/src/modules/product/application/dtos/
 - [x] T092 [US1] Implement ProductService with CRUD, search, soft-delete in apps/api/src/modules/product/product.service.ts
 - [x] T093 [US1] Complete ProductController with all endpoints in apps/api/src/modules/product/product.controller.ts
-- [ ] T094 [US1] Implement product import from Excel in apps/api/src/modules/product/product-import.service.ts
+- [x] T094 [US1] Implement product import from Excel in apps/api/src/modules/product/product-import.service.ts
 
 ### Frontend Implementation for User Story 1
 
@@ -217,9 +217,9 @@
 
 ### Tests for User Story 2 (TDD)
 
-- [ ] T107 [P] [US2] Create test for stock calculation in apps/api/test/inventory/stock-calc.spec.ts
-- [ ] T108 [P] [US2] Create test for movement history in apps/api/test/inventory/movement.spec.ts
-- [ ] T109 [P] [US2] Create E2E test for inventory listing in apps/api/test/inventory/inventory.e2e-spec.ts
+- [x] T107 [P] [US2] Create test for stock calculation in apps/api/test/inventory/stock-calc.spec.ts
+- [x] T108 [P] [US2] Create test for movement history in apps/api/test/inventory/movement.spec.ts
+- [x] T109 [P] [US2] Create E2E test for inventory listing in apps/api/test/inventory/inventory.e2e-spec.ts
 
 ### Backend Implementation for User Story 2
 
@@ -230,16 +230,16 @@
 - [x] T114 [US2] Implement StockCalculatorService for stock calculations in apps/api/src/modules/inventory/stock-calculator.service.ts
 - [x] T115 [US2] Implement InventoryService with stock levels, movements in apps/api/src/modules/inventory/inventory.service.ts
 - [x] T116 [US2] Complete InventoryController with all endpoints in apps/api/src/modules/inventory/inventory.controller.ts
-- [ ] T117 [US2] Implement inventory export to CSV/Excel in apps/api/src/modules/inventory/inventory-export.service.ts
+- [x] T117 [US2] Implement inventory export to CSV/Excel in apps/api/src/modules/inventory/inventory-export.service.ts
 
 ### Frontend Implementation for User Story 2
 
 - [x] T118 [P] [US2] Create inventory types in apps/web/src/features/inventory/types/inventory.types.ts
 - [x] T119 [US2] Create inventory API hooks in apps/web/src/features/inventory/api/inventory.api.ts
-- [ ] T120 [US2] Create useInventory hook in apps/web/src/features/inventory/hooks/useInventory.ts
+- [x] T120 [US2] Create useInventory hook in apps/web/src/features/inventory/hooks/useInventory.ts
 - [x] T121 [P] [US2] Create InventoryTable component in apps/web/src/features/inventory/components/InventoryTable.tsx
-- [ ] T122 [P] [US2] Create MovementHistory component in apps/web/src/features/inventory/components/MovementHistory.tsx
-- [ ] T123 [P] [US2] Create InventoryFilters component in apps/web/src/features/inventory/components/InventoryFilters.tsx
+- [x] T122 [P] [US2] Create MovementHistory component in apps/web/src/features/inventory/components/MovementHistory.tsx
+- [x] T123 [P] [US2] Create InventoryFilters component in apps/web/src/features/inventory/components/InventoryFilters.tsx
 - [x] T124 [US2] Create inventory list page in apps/web/src/app/(dashboard)/inventory/page.tsx
 - [x] T125 [US2] Create product movements page in apps/web/src/app/(dashboard)/inventory/[productId]/movements/page.tsx
 
@@ -255,10 +255,10 @@
 
 ### Tests for User Story 3 (TDD)
 
-- [ ] T126 [P] [US3] Create test for receipt total calculation in apps/api/test/goods-receipt/calculation.spec.ts
-- [ ] T127 [P] [US3] Create test for approval workflow in apps/api/test/goods-receipt/workflow.spec.ts
-- [ ] T128 [P] [US3] Create test for stock increase on approval in apps/api/test/goods-receipt/stock-update.spec.ts
-- [ ] T129 [P] [US3] Create E2E test for complete receipt flow in apps/api/test/goods-receipt/receipt.e2e-spec.ts
+- [x] T126 [P] [US3] Create test for receipt total calculation in apps/api/test/goods-receipt/calculation.spec.ts
+- [x] T127 [P] [US3] Create test for approval workflow in apps/api/test/goods-receipt/workflow.spec.ts
+- [x] T128 [P] [US3] Create test for stock increase on approval in apps/api/test/goods-receipt/stock-update.spec.ts
+- [x] T129 [P] [US3] Create E2E test for complete receipt flow in apps/api/test/goods-receipt/receipt.e2e-spec.ts
 
 ### Backend Implementation for User Story 3
 
@@ -271,15 +271,15 @@
 
 ### Frontend Implementation for User Story 3
 
-- [ ] T136 [P] [US3] Create goods receipt types in apps/web/src/features/goods-receipt/types/receipt.types.ts
-- [ ] T137 [P] [US3] Create goods receipt schemas in apps/web/src/features/goods-receipt/schemas/receipt.schema.ts
-- [ ] T138 [US3] Create goods receipt API hooks in apps/web/src/features/goods-receipt/api/receipt.api.ts
-- [ ] T139 [P] [US3] Create ReceiptForm component in apps/web/src/features/goods-receipt/components/ReceiptForm.tsx
-- [ ] T140 [P] [US3] Create ReceiptItemList component in apps/web/src/features/goods-receipt/components/ReceiptItemList.tsx
-- [ ] T141 [P] [US3] Create ReceiptList component in apps/web/src/features/goods-receipt/components/ReceiptList.tsx
-- [ ] T142 [US3] Create receipts list page in apps/web/src/app/(dashboard)/receipts/page.tsx
-- [ ] T143 [US3] Create new receipt page in apps/web/src/app/(dashboard)/receipts/new/page.tsx
-- [ ] T144 [US3] Create receipt detail page in apps/web/src/app/(dashboard)/receipts/[id]/page.tsx
+- [x] T136 [P] [US3] Create goods receipt types in apps/web/src/features/goods-receipt/types/receipt.types.ts
+- [x] T137 [P] [US3] Create goods receipt schemas in apps/web/src/features/goods-receipt/schemas/receipt.schema.ts
+- [x] T138 [US3] Create goods receipt API hooks in apps/web/src/features/goods-receipt/api/receipt.api.ts
+- [x] T139 [P] [US3] Create ReceiptForm component in apps/web/src/features/goods-receipt/components/ReceiptForm.tsx
+- [x] T140 [P] [US3] Create ReceiptItemList component in apps/web/src/features/goods-receipt/components/ReceiptItemList.tsx
+- [x] T141 [P] [US3] Create ReceiptList component in apps/web/src/features/goods-receipt/components/ReceiptList.tsx
+- [x] T142 [US3] Create receipts list page in apps/web/src/app/(dashboard)/receipts/page.tsx
+- [x] T143 [US3] Create new receipt page in apps/web/src/app/(dashboard)/receipts/new/page.tsx
+- [x] T144 [US3] Create receipt detail page in apps/web/src/app/(dashboard)/receipts/[id]/page.tsx
 
 **Checkpoint**: Goods receipt fully functional
 
@@ -293,10 +293,10 @@
 
 ### Tests for User Story 4 (TDD)
 
-- [ ] T145 [P] [US4] Create test for insufficient stock validation in apps/api/test/goods-issue/stock-check.spec.ts
-- [ ] T146 [P] [US4] Create test for issue workflow in apps/api/test/goods-issue/workflow.spec.ts
-- [ ] T147 [P] [US4] Create test for stock decrease on approval in apps/api/test/goods-issue/stock-update.spec.ts
-- [ ] T148 [P] [US4] Create E2E test for complete issue flow in apps/api/test/goods-issue/issue.e2e-spec.ts
+- [x] T145 [P] [US4] Create test for insufficient stock validation in apps/api/test/goods-issue/stock-check.spec.ts
+- [x] T146 [P] [US4] Create test for issue workflow in apps/api/test/goods-issue/workflow.spec.ts
+- [x] T147 [P] [US4] Create test for stock decrease on approval in apps/api/test/goods-issue/stock-update.spec.ts
+- [x] T148 [P] [US4] Create E2E test for complete issue flow in apps/api/test/goods-issue/issue.e2e-spec.ts
 
 ### Backend Implementation for User Story 4
 
@@ -310,15 +310,15 @@
 
 ### Frontend Implementation for User Story 4
 
-- [ ] T156 [P] [US4] Create goods issue types in apps/web/src/features/goods-issue/types/issue.types.ts
-- [ ] T157 [P] [US4] Create goods issue schemas in apps/web/src/features/goods-issue/schemas/issue.schema.ts
-- [ ] T158 [US4] Create goods issue API hooks in apps/web/src/features/goods-issue/api/issue.api.ts
-- [ ] T159 [P] [US4] Create IssueForm component in apps/web/src/features/goods-issue/components/IssueForm.tsx
-- [ ] T160 [P] [US4] Create IssueItemList component in apps/web/src/features/goods-issue/components/IssueItemList.tsx
-- [ ] T161 [P] [US4] Create IssueList component in apps/web/src/features/goods-issue/components/IssueList.tsx
-- [ ] T162 [US4] Create issues list page in apps/web/src/app/(dashboard)/issues/page.tsx
-- [ ] T163 [US4] Create new issue page in apps/web/src/app/(dashboard)/issues/new/page.tsx
-- [ ] T164 [US4] Create issue detail page in apps/web/src/app/(dashboard)/issues/[id]/page.tsx
+- [x] T156 [P] [US4] Create goods issue types in apps/web/src/features/goods-issue/types/issue.types.ts
+- [x] T157 [P] [US4] Create goods issue schemas in apps/web/src/features/goods-issue/schemas/issue.schema.ts
+- [x] T158 [US4] Create goods issue API hooks in apps/web/src/features/goods-issue/api/issue.api.ts
+- [x] T159 [P] [US4] Create IssueForm component in apps/web/src/features/goods-issue/components/IssueForm.tsx
+- [x] T160 [P] [US4] Create IssueItemList component in apps/web/src/features/goods-issue/components/IssueItemList.tsx
+- [x] T161 [P] [US4] Create IssueList component in apps/web/src/features/goods-issue/components/IssueList.tsx
+- [x] T162 [US4] Create issues list page in apps/web/src/app/(dashboard)/issues/page.tsx
+- [x] T163 [US4] Create new issue page in apps/web/src/app/(dashboard)/issues/new/page.tsx
+- [x] T164 [US4] Create issue detail page in apps/web/src/app/(dashboard)/issues/[id]/page.tsx
 
 **Checkpoint**: Goods issue fully functional
 
@@ -332,8 +332,8 @@
 
 ### Tests for User Story 5 (TDD)
 
-- [ ] T165 [P] [US5] Create test for adjustment calculation in apps/api/test/stock-adjustment/calculation.spec.ts
-- [ ] T166 [P] [US5] Create E2E test for adjustment flow in apps/api/test/stock-adjustment/adjustment.e2e-spec.ts
+- [x] T165 [P] [US5] Create test for adjustment calculation in apps/api/test/stock-adjustment/calculation.spec.ts
+- [x] T166 [P] [US5] Create E2E test for adjustment flow in apps/api/test/stock-adjustment/adjustment.e2e-spec.ts
 
 ### Backend Implementation for User Story 5
 
@@ -365,8 +365,8 @@
 
 ### Tests for User Story 6 (TDD)
 
-- [ ] T179 [P] [US6] Create test for stock report generation in apps/api/test/report/stock-report.spec.ts
-- [ ] T180 [P] [US6] Create test for movement report generation in apps/api/test/report/movement-report.spec.ts
+- [x] T179 [P] [US6] Create test for stock report generation in apps/api/test/report/stock-report.spec.ts
+- [x] T180 [P] [US6] Create test for movement report generation in apps/api/test/report/movement-report.spec.ts
 
 ### Backend Implementation for User Story 6
 
@@ -380,9 +380,9 @@
 
 - [x] T186 [P] [US6] Create report types in apps/web/src/features/report/types/report.types.ts
 - [x] T187 [US6] Create report API hooks in apps/web/src/features/report/api/report.api.ts
-- [ ] T188 [P] [US6] Create StockReport component in apps/web/src/features/report/components/StockReport.tsx
-- [ ] T189 [P] [US6] Create MovementReport component in apps/web/src/features/report/components/MovementReport.tsx
-- [ ] T190 [P] [US6] Create ReportFilters component in apps/web/src/features/report/components/ReportFilters.tsx
+- [x] T188 [P] [US6] Create StockReport component in apps/web/src/features/report/components/StockReport.tsx
+- [x] T189 [P] [US6] Create MovementReport component in apps/web/src/features/report/components/MovementReport.tsx
+- [x] T190 [P] [US6] Create ReportFilters component in apps/web/src/features/report/components/ReportFilters.tsx
 - [x] T191 [US6] Create reports page in apps/web/src/app/(dashboard)/reports/page.tsx
 
 **Checkpoint**: Reports fully functional
@@ -397,8 +397,8 @@
 
 ### Tests for User Story 8 (TDD)
 
-- [ ] T192 [P] [US8] Create test for low stock alert in apps/api/test/notification/low-stock.spec.ts
-- [ ] T193 [P] [US8] Create test for zero stock alert in apps/api/test/notification/zero-stock.spec.ts
+- [x] T192 [P] [US8] Create test for low stock alert in apps/api/test/notification/low-stock.spec.ts
+- [x] T193 [P] [US8] Create test for zero stock alert in apps/api/test/notification/zero-stock.spec.ts
 
 ### Backend Implementation for User Story 8
 
@@ -407,7 +407,7 @@
 - [x] T196 [US8] Create NotificationDtos in apps/api/src/modules/notification/application/dtos/
 - [x] T197 [US8] Implement AlertService for stock threshold checking in apps/api/src/modules/notification/alert.service.ts
 - [x] T198 [US8] Implement NotificationService in apps/api/src/modules/notification/notification.service.ts
-- [ ] T199 [US8] Create BullMQ job for daily stock alerts in apps/api/src/modules/notification/jobs/stock-alert.job.ts
+- [x] T199 [US8] Create BullMQ job for daily stock alerts in apps/api/src/modules/notification/jobs/stock-alert.job.ts
 - [x] T200 [US8] Complete NotificationController in apps/api/src/modules/notification/notification.controller.ts
 
 ### Frontend Implementation for User Story 8
@@ -415,7 +415,7 @@
 - [x] T201 [P] [US8] Create notification types in apps/web/src/features/notification/types/notification.types.ts
 - [x] T202 [US8] Create notification API hooks in apps/web/src/features/notification/api/notification.api.ts
 - [x] T203 [P] [US8] Create NotificationBell component in apps/web/src/features/notification/components/NotificationBell.tsx
-- [ ] T204 [P] [US8] Create NotificationList component in apps/web/src/features/notification/components/NotificationList.tsx
+- [x] T204 [P] [US8] Create NotificationList component in apps/web/src/features/notification/components/NotificationList.tsx
 - [x] T205 [US8] Create notifications page in apps/web/src/app/(dashboard)/notifications/page.tsx
 
 **Checkpoint**: Alerts & notifications fully functional
@@ -431,17 +431,17 @@
 - [x] T208 [P] Create Header component in apps/web/src/components/layouts/Header.tsx
 - [x] T209 [P] Create dashboard layout route in apps/web/src/app/(dashboard)/layout.tsx
 - [x] T210 [P] Create settings page in apps/web/src/app/(dashboard)/settings/page.tsx
-- [ ] T211 [P] Create Button component in apps/web/src/components/ui/button.tsx
-- [ ] T212 [P] Create Input component in apps/web/src/components/ui/input.tsx
-- [ ] T213 [P] Create Select component in apps/web/src/components/ui/select.tsx
-- [ ] T214 [P] Create Table component in apps/web/src/components/ui/table.tsx
-- [ ] T215 [P] Create Dialog component in apps/web/src/components/ui/dialog.tsx
-- [ ] T216 [P] Create Toast component in apps/web/src/components/ui/toast.tsx
-- [ ] T217 [P] Create Card component in apps/web/src/components/ui/card.tsx
-- [ ] T218 [P] Create Badge component in apps/web/src/components/ui/badge.tsx
-- [ ] T219 [P] Create DataTable component with TanStack Table in apps/web/src/components/common/DataTable.tsx
-- [ ] T220 [P] Create Loading component in apps/web/src/components/common/Loading.tsx
-- [ ] T221 [P] Create ErrorBoundary component in apps/web/src/components/common/ErrorBoundary.tsx
+- [x] T211 [P] Create Button component in apps/web/src/components/ui/button.tsx
+- [x] T212 [P] Create Input component in apps/web/src/components/ui/input.tsx
+- [x] T213 [P] Create Select component in apps/web/src/components/ui/select.tsx
+- [x] T214 [P] Create Table component in apps/web/src/components/ui/table.tsx
+- [x] T215 [P] Create Dialog component in apps/web/src/components/ui/dialog.tsx
+- [x] T216 [P] Create Toast component in apps/web/src/components/ui/toast.tsx
+- [x] T217 [P] Create Card component in apps/web/src/components/ui/card.tsx
+- [x] T218 [P] Create Badge component in apps/web/src/components/ui/badge.tsx
+- [x] T219 [P] Create DataTable component with TanStack Table in apps/web/src/components/common/DataTable.tsx
+- [x] T220 [P] Create Loading component in apps/web/src/components/common/Loading.tsx
+- [x] T221 [P] Create ErrorBoundary component in apps/web/src/components/common/ErrorBoundary.tsx
 
 ---
 
@@ -449,13 +449,13 @@
 
 **Purpose**: Full workflow E2E tests with Playwright
 
-- [ ] T222 Create e2e/playwright.config.ts
-- [ ] T223 [P] Create E2E test for complete receipt workflow in e2e/tests/workflow/complete-receipt-workflow.spec.ts
-- [ ] T224 [P] Create E2E test for complete issue workflow in e2e/tests/workflow/complete-issue-workflow.spec.ts
-- [ ] T225 [P] Create E2E test for stock adjustment in e2e/tests/workflow/stock-adjustment-workflow.spec.ts
-- [ ] T226 [P] Create E2E test for approval workflow in e2e/tests/workflow/approval-workflow.spec.ts
-- [ ] T227 [P] Create E2E test for low stock alert in e2e/tests/workflow/low-stock-alert.spec.ts
-- [ ] T228 [P] Create E2E test for concurrent operations in e2e/tests/workflow/concurrent-operations.spec.ts
+- [x] T222 Create e2e/playwright.config.ts
+- [x] T223 [P] Create E2E test for complete receipt workflow in e2e/tests/workflow/complete-receipt-workflow.spec.ts
+- [x] T224 [P] Create E2E test for complete issue workflow in e2e/tests/workflow/complete-issue-workflow.spec.ts
+- [x] T225 [P] Create E2E test for stock adjustment in e2e/tests/workflow/stock-adjustment-workflow.spec.ts
+- [x] T226 [P] Create E2E test for approval workflow in e2e/tests/workflow/approval-workflow.spec.ts
+- [x] T227 [P] Create E2E test for low stock alert in e2e/tests/workflow/low-stock-alert.spec.ts
+- [x] T228 [P] Create E2E test for concurrent operations in e2e/tests/workflow/concurrent-operations.spec.ts
 
 ---
 
@@ -463,13 +463,13 @@
 
 **Purpose**: GitHub Actions, Docker, and final documentation
 
-- [ ] T229 Create .github/workflows/ci.yml for testing and linting
-- [ ] T230 [P] Create .github/workflows/deploy.yml for deployment
-- [ ] T231 [P] Create Dockerfile for backend in apps/api/Dockerfile
-- [ ] T232 [P] Create Dockerfile for frontend in apps/web/Dockerfile
-- [ ] T233 Create docker-compose.yml for local development
-- [ ] T234 [P] Create API documentation with Swagger decorators update
-- [ ] T235 [P] Update README.md with setup instructions
+- [x] T229 Create .github/workflows/ci.yml for testing and linting
+- [x] T230 [P] Create .github/workflows/deploy.yml for deployment
+- [x] T231 [P] Create Dockerfile for backend in apps/api/Dockerfile
+- [x] T232 [P] Create Dockerfile for frontend in apps/web/Dockerfile
+- [x] T233 Create docker-compose.yml for local development
+- [x] T234 [P] Create API documentation with Swagger decorators update
+- [x] T235 [P] Update README.md with setup instructions
 
 ---
 

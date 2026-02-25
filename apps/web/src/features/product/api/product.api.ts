@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import type { Product, ProductQuery, ProductListResponse, CreateProductData, UpdateProductData } from '../types/product.types';
 
 export const productKeys = {

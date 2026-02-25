@@ -46,6 +46,21 @@ export class NotificationController {
     return { count };
   }
 
+  @Post('read-all')
+  @ApiOperation({ summary: 'Mark all notifications as read' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'All notifications marked as read' })
+  async markAllAsRead(@Request() req: { user: { id: string } }) {
+    return this.notificationService.markAllAsRead(req.user.id);
+  }
+
+  @Delete('read')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Delete all read notifications' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Read notifications deleted' })
+  async deleteAllRead(@Request() req: { user: { id: string } }) {
+    return this.notificationService.deleteAllRead(req.user.id);
+  }
+
   @Post(':id/read')
   @ApiOperation({ summary: 'Mark notification as read' })
   @ApiParam({ name: 'id', description: 'Notification ID' })
@@ -56,13 +71,6 @@ export class NotificationController {
     @Request() req: { user: { id: string } },
   ) {
     return this.notificationService.markAsRead(id, req.user.id);
-  }
-
-  @Post('read-all')
-  @ApiOperation({ summary: 'Mark all notifications as read' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'All notifications marked as read' })
-  async markAllAsRead(@Request() req: { user: { id: string } }) {
-    return this.notificationService.markAllAsRead(req.user.id);
   }
 
   @Delete(':id')
@@ -76,13 +84,5 @@ export class NotificationController {
     @Request() req: { user: { id: string } },
   ) {
     return this.notificationService.delete(id, req.user.id);
-  }
-
-  @Delete('read')
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'Delete all read notifications' })
-  @ApiResponse({ status: HttpStatus.OK, description: 'Read notifications deleted' })
-  async deleteAllRead(@Request() req: { user: { id: string } }) {
-    return this.notificationService.deleteAllRead(req.user.id);
   }
 }

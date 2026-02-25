@@ -1,0 +1,30 @@
+{
+  "name": "@inventory/e2e",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "test:update": "playwright update",
+    "test:install": "playwright install"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  },
+  "playwright": {
+    "testDir": "./tests",
+    "timeout": 30000,
+    "retries": 0,
+    "webServer": {
+      "command": "turbo run dev --filter @inventory/web",
+      "url": "http://localhost:13100",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
+  }
+}

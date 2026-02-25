@@ -47,7 +47,7 @@ const initialState: AuthState = {
   user: null,
   token: null,
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false,
 };
 
 /**
@@ -146,16 +146,6 @@ export const useAuthStore = create<AuthStore>()(
         token: state.token,
         isAuthenticated: state.isAuthenticated,
       }),
-      onRehydrateStorage: () => (state) => {
-        // After rehydration, sync token to localStorage for API client
-        if (state?.token && typeof window !== 'undefined') {
-          localStorage.setItem('auth-token', state.token);
-        }
-        // Set loading to false after rehydration
-        if (state) {
-          state.isLoading = false;
-        }
-      },
     }
   )
 );

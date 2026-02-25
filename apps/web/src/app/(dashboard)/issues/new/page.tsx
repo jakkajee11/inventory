@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api/api-client';
+import apiClient from '@/lib/api/api-client';
 import { IssueForm } from '@/features/goods-issue/components/IssueForm';
 import { useCreateIssue } from '@/features/goods-issue/api/issue.api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';

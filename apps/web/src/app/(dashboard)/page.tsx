@@ -18,7 +18,6 @@ import {
   TrendingDown,
   Minus,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/stores/auth.store';
 
 // Mock data - replace with real API calls later
