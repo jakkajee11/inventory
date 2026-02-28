@@ -54,16 +54,20 @@ export class ReportService {
       totalPages: number;
     };
   }> {
-    const { asOfDate, categoryId, page = 1, limit = 50 } = params;
+    // Parse query params to ensure correct types
+    const categoryId = params.categoryId;
+    const page = parseInt(String(params.page || 1), 10);
+    const limit = parseInt(String(params.limit || 50), 10);
     const skip = (page - 1) * limit;
 
-    // Build where clause
-    const where = {
+    // Build where clause - matching inventory repository pattern
+    const where: any = {
       companyId,
-      deletedAt: null,
       isActive: true,
-      ...(categoryId && { categoryId }),
     };
+    if (categoryId) {
+      where.categoryId = categoryId;
+    }
 
     // Get products with current stock
     const [products, totalCount] = await Promise.all([
@@ -112,16 +116,25 @@ export class ReportService {
       };
     });
 
-    // Calculate summary
+    // Get summary from ALL products (not just current page)
+    const allProducts = await this.prisma.product.findMany({
+      where,
+      select: {
+        currentStock: true,
+        minStock: true,
+        averageCost: true,
+      },
+    });
+
     const summary = {
       totalProducts: totalCount,
-      totalValue: items.reduce((sum, item) => sum + item.totalValue, 0),
-      lowStockCount: items.filter(item => item.stockStatus === 'LOW').length,
-      outOfStockCount: items.filter(item => item.currentStock === 0).length,
+      totalValue: allProducts.reduce((sum, p) => sum + (p.currentStock * Number(p.averageCost)), 0),
+      lowStockCount: allProducts.filter(p => p.currentStock <= p.minStock).length,
+      outOfStockCount: allProducts.filter(p => p.currentStock === 0).length,
     };
 
     return {
-      asOfDate: asOfDate || new Date().toISOString(),
+      asOfDate: new Date().toISOString(),
       generatedAt: new Date().toISOString(),
       items,
       summary,
@@ -168,16 +181,29 @@ export class ReportService {
       totalPages: number;
     };
   }> {
-    const { startDate, endDate, productId, categoryId, page = 1, limit = 50 } = params;
+    // Parse query params to ensure correct types
+    const startDate = params.startDate;
+    const endDate = params.endDate;
+    const productId = params.productId;
+    const categoryId = params.categoryId;
+    const page = parseInt(String(params.page || 1), 10);
+    const limit = parseInt(String(params.limit || 50), 10);
     const skip = (page - 1) * limit;
 
     // Build where clause for stock movements
     const movementWhere: any = {
       companyId,
-      ...(startDate && { createdAt: { gte: new Date(startDate) } }),
-      ...(endDate && { createdAt: { lte: new Date(endDate) } }),
-      ...(productId && { productId }),
     };
+
+    if (startDate) {
+      movementWhere.createdAt = { ...movementWhere.createdAt, gte: new Date(startDate) };
+    }
+    if (endDate) {
+      movementWhere.createdAt = { ...movementWhere.createdAt, lte: new Date(endDate) };
+    }
+    if (productId) {
+      movementWhere.productId = productId;
+    }
 
     // Get movements
     const [movements, totalCount] = await Promise.all([
@@ -239,15 +265,33 @@ export class ReportService {
         referenceType,
         referenceNumber,
         unitCost,
-        totalValue: movement.quantity * unitCost,
+        totalValue: Math.abs(movement.quantity) * unitCost,
       };
     });
 
-    // Calculate summary
-    const totalIn = items.filter(m => m.quantity > 0).reduce((sum, m) => sum + m.quantity, 0);
-    const totalOut = Math.abs(items.filter(m => m.quantity < 0).reduce((sum, m) => sum + m.quantity, 0));
+    // Get summary from ALL movements (not just current page)
+    const allMovements = await this.prisma.stockMovement.findMany({
+      where: movementWhere,
+      select: {
+        quantity: true,
+        unitCost: true,
+        type: true,
+      },
+    });
+
+    const totalIn = allMovements
+      .filter(m => m.quantity > 0)
+      .reduce((sum, m) => sum + m.quantity, 0);
+    const totalOut = Math.abs(
+      allMovements
+        .filter(m => m.quantity < 0)
+        .reduce((sum, m) => sum + m.quantity, 0)
+    );
     const netChange = totalIn - totalOut;
-    const totalValue = items.reduce((sum, m) => sum + m.totalValue, 0);
+    const totalValue = allMovements.reduce(
+      (sum, m) => sum + (Math.abs(m.quantity) * Number(m.unitCost)),
+      0
+    );
 
     return {
       startDate: startDate || new Date(new Date().setMonth(new Date().getMonth() - 1)).toISOString(),
@@ -255,7 +299,7 @@ export class ReportService {
       generatedAt: new Date().toISOString(),
       items,
       summary: {
-        totalMovements: items.length,
+        totalMovements: totalCount,
         totalIn,
         totalOut,
         netChange,
@@ -264,8 +308,8 @@ export class ReportService {
       pagination: {
         page,
         limit,
-        total: items.length,
-        totalPages: Math.ceil(items.length / limit),
+        total: totalCount,
+        totalPages: Math.ceil(totalCount / limit),
       },
     };
   }

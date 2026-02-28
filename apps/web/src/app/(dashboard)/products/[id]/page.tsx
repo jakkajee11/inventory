@@ -90,16 +90,16 @@ function ProductDetailContent({ id }: { id: string }) {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-gray-500">Cost Price</p>
-                <p className="font-medium text-lg">฿{product.costPrice.toFixed(2)}</p>
+                <p className="font-medium text-lg">฿{Number(product.costPrice).toFixed(2)}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500">Selling Price</p>
-                <p className="font-medium text-lg">฿{product.sellingPrice.toFixed(2)}</p>
+                <p className="font-medium text-lg">฿{Number(product.sellingPrice).toFixed(2)}</p>
               </div>
             </div>
             <div>
               <p className="text-sm text-gray-500">Average Cost</p>
-              <p className="font-medium">฿{product.averageCost.toFixed(2)}</p>
+              <p className="font-medium">฿{Number(product.averageCost).toFixed(2)}</p>
             </div>
           </CardContent>
         </Card>
