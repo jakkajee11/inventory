@@ -11,7 +11,7 @@ import {
   Legend,
 } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import type { TrendDataPoint } from '../../types/dashboard.types';
 
 interface InventoryTrendChartProps {
@@ -19,8 +19,26 @@ interface InventoryTrendChartProps {
   isLoading: boolean;
 }
 
+// Thai month abbreviations
+const thaiMonths = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+
 export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProps) {
   const t = useTranslations('dashboard.charts');
+  const locale = useLocale();
+
+  const formatDate = (dateStr: string) => {
+    try {
+      const date = new Date(dateStr);
+      if (locale === 'th') {
+        const day = date.getDate();
+        const month = thaiMonths[date.getMonth()];
+        return `${day} ${month}`;
+      }
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    } catch {
+      return dateStr;
+    }
+  };
 
   if (isLoading) {
     return (
@@ -65,6 +83,7 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
                 tick={{ fontSize: 11 }}
                 tickLine={false}
                 axisLine={false}
+                tickFormatter={formatDate}
                 className="text-muted-foreground"
               />
               <YAxis
@@ -82,6 +101,7 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
                   fontSize: '12px',
                 }}
                 labelStyle={{ color: 'hsl(var(--foreground))' }}
+                labelFormatter={formatDate}
               />
               <Legend
                 wrapperStyle={{ fontSize: '12px' }}
