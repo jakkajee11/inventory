@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 // Default admin credentials
 const DEFAULT_ADMIN = {
   email: 'admin@open-inventory.app',
-  password: '!Adm!N2026',
+  password: 'Admin123456',
   name: 'Administrator',
 };
 
