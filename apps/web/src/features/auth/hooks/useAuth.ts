@@ -29,7 +29,7 @@ export const useAuth = () => {
       setAuth(response.user, response.accessToken);
       // Small delay to ensure state is saved
       await new Promise(resolve => setTimeout(resolve, 100));
-      router.push('/dashboard');
+      router.push('/products');
       router.refresh();
       return response;
     } catch (error) {
@@ -43,7 +43,7 @@ export const useAuth = () => {
       localStorage.setItem('auth-token', response.accessToken);
       setAuth(response.user, response.accessToken);
       await new Promise(resolve => setTimeout(resolve, 100));
-      router.push('/dashboard');
+      router.push('/products');
       router.refresh();
       return response;
     } catch (error) {
