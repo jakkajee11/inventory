@@ -48,11 +48,11 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Cost:</span>
-            <span>฿{product.costPrice.toFixed(2)}</span>
+            <span>฿{Number(product.costPrice).toFixed(2)}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-500">Price:</span>
-            <span className="font-medium">฿{product.sellingPrice.toFixed(2)}</span>
+            <span className="font-medium">฿{Number(product.sellingPrice).toFixed(2)}</span>
           </div>
           {product.category && (
             <div className="flex justify-between">

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
+import { useAuthStore } from '@/stores/auth.store';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -12,20 +13,23 @@ interface DashboardLayoutProps {
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [isAuthed, setIsAuthed] = useState(false);
+  const { isAuthenticated, token } = useAuthStore();
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    // Check localStorage for auth token
-    const authToken = localStorage.getItem('auth-token');
+    // Small delay to allow zustand persist to hydrate
+    const timer = setTimeout(() => {
+      // Check both zustand state and localStorage as fallback
+      const authToken = localStorage.getItem('auth-token');
 
-    if (!authToken) {
-      router.push('/login');
-    } else {
-      setIsAuthed(true);
-    }
-    setChecking(false);
-  }, [router]);
+      if (!isAuthenticated && !authToken) {
+        router.push('/login');
+      }
+      setChecking(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [router, isAuthenticated]);
 
   const openSidebar = () => setSidebarOpen(true);
   const closeSidebar = () => setSidebarOpen(false);
@@ -43,7 +47,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   // Don't render if not authenticated
-  if (!isAuthed) {
+  if (!isAuthenticated && !token) {
     return null;
   }
 
