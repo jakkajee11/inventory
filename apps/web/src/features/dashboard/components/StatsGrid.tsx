@@ -71,6 +71,7 @@ export function StatsGrid({ stats, isLoading }: StatsGridProps) {
           trend={stat.trend}
           description={stat.description}
           valuePrefix={stat.valuePrefix}
+          trendLabel={stat.change !== undefined ? t('fromLastPeriod') : ''}
         />
       ))}
     </div>

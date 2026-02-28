@@ -10,7 +10,8 @@
     "lowStockItems": "Low Stock Items",
     "outOfStock": "Out of Stock",
     "inventoryValue": "Inventory Value",
-    "needsAttention": "Needs attention"
+    "needsAttention": "Needs attention",
+    "fromLastPeriod": "from last period"
   },
   "quickActions": {
     "title": "Quick Actions",

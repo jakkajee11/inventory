@@ -10,7 +10,8 @@
     "lowStockItems": "สินค้าใกล้หมด",
     "outOfStock": "สินค้าหมด",
     "inventoryValue": "มูลค่าสินค้าคงคลัง",
-    "needsAttention": "ต้องดำเนินการ"
+    "needsAttention": "ต้องดำเนินการ",
+    "fromLastPeriod": "จากงวดก่อนหน้า"
   },
   "quickActions": {
     "title": "การดำเนินการด่วน",
