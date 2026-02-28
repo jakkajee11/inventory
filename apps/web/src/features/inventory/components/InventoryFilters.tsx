@@ -9,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Search, Filter, RotateCcw } from 'lucide-react';
+import { Search, RotateCcw } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface InventoryFiltersProps {
   search: string;
@@ -34,6 +35,8 @@ export function InventoryFilters({
   onReset,
   isFetching = false,
 }: InventoryFiltersProps) {
+  const t = useTranslations('inventory.filters');
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row gap-4">
@@ -41,7 +44,7 @@ export function InventoryFilters({
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           <Input
             type="text"
-            placeholder="Search by SKU, name, or barcode..."
+            placeholder={t('search')}
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
             className="pl-10"
@@ -56,13 +59,13 @@ export function InventoryFilters({
             disabled={isFetching}
           >
             <SelectTrigger className="w-32">
-              <SelectValue placeholder="Status" />
+              <SelectValue placeholder={t('status')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="low">Low Stock</SelectItem>
-              <SelectItem value="out">Out of Stock</SelectItem>
-              <SelectItem value="normal">Normal</SelectItem>
+              <SelectItem value="all">{t('allStatus')}</SelectItem>
+              <SelectItem value="low">{t('lowStock')}</SelectItem>
+              <SelectItem value="out">{t('outOfStock')}</SelectItem>
+              <SelectItem value="normal">{t('normal')}</SelectItem>
             </SelectContent>
           </Select>
 
@@ -72,10 +75,10 @@ export function InventoryFilters({
             disabled={isFetching}
           >
             <SelectTrigger className="w-48">
-              <SelectValue placeholder="All Categories" />
+              <SelectValue placeholder={t('category')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="">{t('allCategories')}</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}

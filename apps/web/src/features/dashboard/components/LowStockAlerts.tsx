@@ -1,8 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import type { LowStockItem } from '../types/dashboard.types';
 
 interface LowStockAlertsProps {
@@ -11,6 +12,8 @@ interface LowStockAlertsProps {
 }
 
 export function LowStockAlerts({ items, isLoading }: LowStockAlertsProps) {
+  const t = useTranslations('dashboard.lowStockAlerts');
+
   const getStockPercentage = (current: number, min: number) => {
     if (min === 0) return 0;
     return Math.min(100, Math.round((current / min) * 100));
@@ -21,13 +24,13 @@ export function LowStockAlerts({ items, isLoading }: LowStockAlertsProps) {
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <AlertTriangle className="h-5 w-5 text-amber-500" />
-          <h3 className="text-base font-semibold">Low Stock Alerts</h3>
+          <h3 className="text-base font-semibold">{t('title')}</h3>
         </div>
         <Link
           href="/inventory?stockStatus=low"
           className="flex items-center text-xs text-primary hover:underline"
         >
-          View all
+          {t('viewAll')}
           <ArrowRight className="ml-1 h-3 w-3" />
         </Link>
       </div>
@@ -55,7 +58,7 @@ export function LowStockAlerts({ items, isLoading }: LowStockAlertsProps) {
                     <p className="text-xs text-muted-foreground">{item.sku}</p>
                   </div>
                   <span className="ml-2 shrink-0 rounded-full bg-amber-500/10 px-2 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-400">
-                    {item.currentStock} left
+                    {item.currentStock} {t('left')}
                   </span>
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
@@ -65,14 +68,14 @@ export function LowStockAlerts({ items, isLoading }: LowStockAlertsProps) {
                   />
                 </div>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Min: {item.minStock} | Current: {item.currentStock}
+                  {t('min')}: {item.minStock} | {t('current')}: {item.currentStock}
                 </p>
               </Link>
             );
           })
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            No low stock items
+            {t('noAlerts')}
           </div>
         )}
       </div>

@@ -1,25 +1,34 @@
 {
   "title": "Inventory",
+  "manageStock": "Manage your stock levels",
   "stockMovements": "Stock Movements",
-  "table": {
-    "product": "Product",
-    "sku": "SKU",
-    "quantity": "Quantity",
-    "available": "Available",
-    "reserved": "Reserved",
-    "location": "Location",
-    "lastUpdated": "Last Updated",
-    "actions": "Actions"
-  },
   "filters": {
-    "search": "Search inventory...",
-    "status": "All Status",
-    "location": "All Locations"
+    "search": "Search by SKU, name, or barcode...",
+    "status": "Status",
+    "allStatus": "All Status",
+    "lowStock": "Low Stock",
+    "outOfStock": "Out of Stock",
+    "normal": "Normal",
+    "category": "Category",
+    "allCategories": "All Categories"
+  },
+  "table": {
+    "sku": "SKU",
+    "product": "Product",
+    "category": "Category",
+    "stock": "Stock",
+    "minStock": "Min Stock",
+    "avgCost": "Avg Cost",
+    "totalValue": "Total Value",
+    "status": "Status",
+    "actions": "Actions"
   },
   "status": {
     "inStock": "In Stock",
     "lowStock": "Low Stock",
-    "outOfStock": "Out of Stock"
+    "outOfStock": "Out of Stock",
+    "overstock": "Overstock",
+    "normal": "Normal"
   },
   "movements": {
     "title": "Stock Movements",

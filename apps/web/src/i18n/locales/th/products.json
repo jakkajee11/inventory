@@ -1,8 +1,10 @@
 {
   "title": "สินค้า",
   "addProduct": "เพิ่มสินค้า",
+  "addFirstProduct": "เพิ่มสินค้าชิ้นแรกของคุณ",
   "editProduct": "แก้ไขสินค้า",
   "productDetails": "รายละเอียดสินค้า",
+  "productsTotal": "{count, plural, =0 {ไม่มีสินค้า} other {# รายการ}}",
   "form": {
     "sku": "รหัสสินค้า",
     "name": "ชื่อสินค้า",
@@ -38,9 +40,16 @@
     "actions": "การดำเนินการ"
   },
   "filters": {
-    "search": "ค้นหาสินค้า...",
+    "search": "ค้นหาด้วยรหัส, ชื่อ หรือบาร์โค้ด...",
     "category": "ทุกหมวดหมู่",
-    "status": "ทุกสถานะ"
+    "status": "ทุกสถานะ",
+    "showInactive": "แสดงที่ไม่ใช้งาน",
+    "hideInactive": "ซ่อนที่ไม่ใช้งาน"
+  },
+  "pagination": {
+    "previous": "ก่อนหน้า",
+    "next": "ถัดไป",
+    "pageOf": "หน้า {page} จาก {total}"
   },
   "messages": {
     "noProducts": "ไม่พบสินค้า",

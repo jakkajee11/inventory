@@ -3,6 +3,7 @@
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Filter } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface ProductSearchProps {
   search: string;
@@ -17,13 +18,15 @@ export function ProductSearch({
   includeInactive,
   onToggleInactive,
 }: ProductSearchProps) {
+  const t = useTranslations('products');
+
   return (
     <div className="flex gap-4">
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
         <Input
           type="text"
-          placeholder="Search by SKU, name, or barcode..."
+          placeholder={t('filters.search')}
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           className="pl-10"
@@ -34,7 +37,7 @@ export function ProductSearch({
         onClick={onToggleInactive}
       >
         <Filter className="h-4 w-4 mr-2" />
-        {includeInactive ? 'Hide Inactive' : 'Show Inactive'}
+        {includeInactive ? t('filters.hideInactive') : t('filters.showInactive')}
       </Button>
     </div>
   );

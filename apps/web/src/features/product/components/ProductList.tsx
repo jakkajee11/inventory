@@ -5,7 +5,8 @@ import { ProductCard } from './ProductCard';
 import { ProductSearch } from './ProductSearch';
 import { Button } from '@/components/ui/button';
 import { Plus, RefreshCw } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export function ProductList() {
   const {
@@ -20,13 +21,14 @@ export function ProductList() {
     toggleInactive,
     refetch,
   } = useProducts();
+  const t = useTranslations('products');
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">Products</h1>
-          <p className="text-gray-500">{total} products total</p>
+          <h1 className="text-2xl font-bold">{t('title')}</h1>
+          <p className="text-gray-500">{t('productsTotal', { count: total })}</p>
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="icon" onClick={() => refetch()}>
@@ -35,7 +37,7 @@ export function ProductList() {
           <Link href="/products/new">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
-              Add Product
+              {t('addProduct')}
             </Button>
           </Link>
         </div>
@@ -56,9 +58,9 @@ export function ProductList() {
         </div>
       ) : products.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-500">No products found</p>
+          <p className="text-gray-500">{t('messages.noProducts')}</p>
           <Link href="/products/new">
-            <Button className="mt-4">Add your first product</Button>
+            <Button className="mt-4">{t('addFirstProduct')}</Button>
           </Link>
         </div>
       ) : (
@@ -76,17 +78,17 @@ export function ProductList() {
             disabled={page <= 1}
             onClick={() => setPage(page - 1)}
           >
-            Previous
+            {t('pagination.previous')}
           </Button>
           <span className="py-2 px-4">
-            Page {page} of {totalPages}
+            {t('pagination.pageOf', { page, total: totalPages })}
           </span>
           <Button
             variant="outline"
             disabled={page >= totalPages}
             onClick={() => setPage(page + 1)}
           >
-            Next
+            {t('pagination.next')}
           </Button>
         </div>
       )}

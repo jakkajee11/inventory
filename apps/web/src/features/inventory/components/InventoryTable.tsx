@@ -11,7 +11,8 @@ import {
   TableRow
 } from '@/components/ui/table';
 import { ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import type { InventoryItem } from '../types/inventory.types';
 
 interface InventoryTableProps {
@@ -19,23 +20,25 @@ interface InventoryTableProps {
 }
 
 export function InventoryTable({ items }: InventoryTableProps) {
+  const t = useTranslations('inventory');
+
   const getStockStatus = (item: InventoryItem) => {
     if (item.currentStock <= 0) {
-      return { label: 'Out of Stock', variant: 'destructive' as const };
+      return { label: t('status.outOfStock'), variant: 'destructive' as const };
     }
     if (item.currentStock <= item.minStock) {
-      return { label: 'Low Stock', variant: 'secondary' as const };
+      return { label: t('status.lowStock'), variant: 'secondary' as const };
     }
     if (item.maxStock && item.currentStock > item.maxStock) {
-      return { label: 'Overstock', variant: 'default' as const };
+      return { label: t('status.overstock'), variant: 'default' as const };
     }
-    return { label: 'Normal', variant: 'default' as const };
+    return { label: t('status.normal'), variant: 'default' as const };
   };
 
   if (items.length === 0) {
     return (
       <div className="text-center py-10">
-        <p className="text-gray-500">No inventory items found</p>
+        <p className="text-gray-500">{t('messages.noInventory')}</p>
       </div>
     );
   }
@@ -44,14 +47,14 @@ export function InventoryTable({ items }: InventoryTableProps) {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>SKU</TableHead>
-          <TableHead>Product</TableHead>
-          <TableHead>Category</TableHead>
-          <TableHead className="text-right">Stock</TableHead>
-          <TableHead className="text-right">Min Stock</TableHead>
-          <TableHead className="text-right">Avg Cost</TableHead>
-          <TableHead className="text-right">Total Value</TableHead>
-          <TableHead>Status</TableHead>
+          <TableHead>{t('table.sku')}</TableHead>
+          <TableHead>{t('table.product')}</TableHead>
+          <TableHead>{t('table.category')}</TableHead>
+          <TableHead className="text-right">{t('table.stock')}</TableHead>
+          <TableHead className="text-right">{t('table.minStock')}</TableHead>
+          <TableHead className="text-right">{t('table.avgCost')}</TableHead>
+          <TableHead className="text-right">{t('table.totalValue')}</TableHead>
+          <TableHead>{t('table.status')}</TableHead>
           <TableHead></TableHead>
         </TableRow>
       </TableHeader>

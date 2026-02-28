@@ -26,7 +26,10 @@
   "lowStockAlerts": {
     "title": "Low Stock Alerts",
     "viewAll": "View All",
-    "noAlerts": "No low stock alerts"
+    "noAlerts": "No low stock items",
+    "left": "left",
+    "min": "Min",
+    "current": "Current"
   },
   "activityFeed": {
     "title": "Recent Activity",

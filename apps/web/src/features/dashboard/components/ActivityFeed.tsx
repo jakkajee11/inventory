@@ -1,9 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 import { ArrowDownToLine, ArrowUpFromLine, SlidersHorizontal, Package, ArrowRight } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 import type { ActivityItem } from '../types/dashboard.types';
 
 interface ActivityFeedProps {
@@ -12,6 +13,8 @@ interface ActivityFeedProps {
 }
 
 export function ActivityFeed({ items, isLoading }: ActivityFeedProps) {
+  const t = useTranslations('dashboard.activityFeed');
+
   const getActivityIcon = (type: string) => {
     switch (type) {
       case 'receipt':
@@ -41,12 +44,12 @@ export function ActivityFeed({ items, isLoading }: ActivityFeedProps) {
   return (
     <div className="bento-item glass flex h-full flex-col rounded-xl p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-base font-semibold">Recent Activity</h3>
+        <h3 className="text-base font-semibold">{t('title')}</h3>
         <Link
           href="/reports"
           className="flex items-center text-xs text-primary hover:underline"
         >
-          View all
+          {t('viewAll')}
           <ArrowRight className="ml-1 h-3 w-3" />
         </Link>
       </div>
@@ -91,7 +94,7 @@ export function ActivityFeed({ items, isLoading }: ActivityFeedProps) {
           ))
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            No recent activity
+            {t('noActivity')}
           </div>
         )}
       </div>

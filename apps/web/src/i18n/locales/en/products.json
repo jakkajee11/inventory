@@ -1,8 +1,10 @@
 {
   "title": "Products",
   "addProduct": "Add Product",
+  "addFirstProduct": "Add your first product",
   "editProduct": "Edit Product",
   "productDetails": "Product Details",
+  "productsTotal": "{count, plural, =0 {No products} one {# product} other {# products}} total",
   "form": {
     "sku": "SKU",
     "name": "Product Name",
@@ -38,9 +40,16 @@
     "actions": "Actions"
   },
   "filters": {
-    "search": "Search products...",
+    "search": "Search by SKU, name, or barcode...",
     "category": "All Categories",
-    "status": "All Status"
+    "status": "All Status",
+    "showInactive": "Show Inactive",
+    "hideInactive": "Hide Inactive"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}"
   },
   "messages": {
     "noProducts": "No products found",
