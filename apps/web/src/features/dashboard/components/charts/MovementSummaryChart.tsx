@@ -49,7 +49,7 @@ export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartPr
         <h3 className="text-base font-semibold">{t('movementSummary')}</h3>
         <p className="text-sm text-muted-foreground">{t('last30DaysBreakdown')}</p>
       </div>
-      <div className="min-h-0 flex-1">
+      <div className="min-h-[200px] flex-1">
         {total > 0 ? (
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
