@@ -1,0 +1,51 @@
+{
+  "title": "สินค้า",
+  "addProduct": "เพิ่มสินค้า",
+  "editProduct": "แก้ไขสินค้า",
+  "productDetails": "รายละเอียดสินค้า",
+  "form": {
+    "sku": "รหัสสินค้า",
+    "name": "ชื่อสินค้า",
+    "description": "รายละเอียด",
+    "category": "หมวดหมู่",
+    "unit": "หน่วย",
+    "unitPrice": "ราคาขาย",
+    "costPrice": "ราคาทุน",
+    "minStockLevel": "ระดับสต็อกขั้นต่ำ",
+    "maxStockLevel": "ระดับสต็อกสูงสุด",
+    "image": "รูปภาพสินค้า",
+    "uploadImage": "อัปโหลดรูปภาพ",
+    "active": "ใช้งาน"
+  },
+  "placeholders": {
+    "sku": "กรอกรหัสสินค้า",
+    "name": "กรอกชื่อสินค้า",
+    "description": "กรอกรายละเอียด",
+    "category": "เลือกหมวดหมู่",
+    "unit": "เลือกหน่วย",
+    "unitPrice": "0.00",
+    "costPrice": "0.00",
+    "minStockLevel": "0",
+    "maxStockLevel": "0"
+  },
+  "table": {
+    "sku": "รหัสสินค้า",
+    "name": "ชื่อ",
+    "category": "หมวดหมู่",
+    "stock": "สต็อก",
+    "unitPrice": "ราคาขาย",
+    "status": "สถานะ",
+    "actions": "การดำเนินการ"
+  },
+  "filters": {
+    "search": "ค้นหาสินค้า...",
+    "category": "ทุกหมวดหมู่",
+    "status": "ทุกสถานะ"
+  },
+  "messages": {
+    "noProducts": "ไม่พบสินค้า",
+    "productCreated": "สร้างสินค้าสำเร็จ",
+    "productUpdated": "อัปเดตสินค้าสำเร็จ",
+    "productDeleted": "ลบสินค้าสำเร็จ"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "greeting": {
+    "morning": "สวัสดีตอนเช้า",
+    "afternoon": "สวัสดีตอนบ่าย",
+    "evening": "สวัสดีตอนเย็น",
+    "welcomeMessage": "นี่คือสิ่งที่เกิดขึ้นกับสินค้าคงคลังของคุณวันนี้"
+  },
+  "stats": {
+    "totalProducts": "สินค้าทั้งหมด",
+    "lowStockItems": "สินค้าใกล้หมด",
+    "outOfStock": "สินค้าหมด",
+    "inventoryValue": "มูลค่าสินค้าคงคลัง",
+    "needsAttention": "ต้องดำเนินการ"
+  },
+  "quickActions": {
+    "title": "การดำเนินการด่วน",
+    "addProduct": "เพิ่มสินค้า",
+    "addProductDesc": "สร้างสินค้าใหม่",
+    "goodsReceipt": "รับสินค้าเข้า",
+    "goodsReceiptDesc": "รับสินค้าคงคลัง",
+    "goodsIssue": "เบิกสินค้า",
+    "goodsIssueDesc": "เบิกสินค้าคงคลัง",
+    "adjustStock": "ปรับสต็อก",
+    "adjustStockDesc": "ปรับปรุงสินค้าคงคลัง"
+  },
+  "lowStockAlerts": {
+    "title": "แจ้งเตือนสินค้าใกล้หมด",
+    "viewAll": "ดูทั้งหมด",
+    "noAlerts": "ไม่มีการแจ้งเตือนสินค้าใกล้หมด"
+  },
+  "activityFeed": {
+    "title": "กิจกรรมล่าสุด",
+    "viewAll": "ดูทั้งหมด",
+    "noActivity": "ไม่มีกิจกรรมล่าสุด"
+  },
+  "charts": {
+    "inventoryTrends": "แนวโน้มสินค้าคงคลัง",
+    "movementSummary": "สรุปการเคลื่อนไหว"
+  }
+}

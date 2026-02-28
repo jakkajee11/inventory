@@ -1,0 +1,40 @@
+{
+  "title": "Inventory",
+  "stockMovements": "Stock Movements",
+  "table": {
+    "product": "Product",
+    "sku": "SKU",
+    "quantity": "Quantity",
+    "available": "Available",
+    "reserved": "Reserved",
+    "location": "Location",
+    "lastUpdated": "Last Updated",
+    "actions": "Actions"
+  },
+  "filters": {
+    "search": "Search inventory...",
+    "status": "All Status",
+    "location": "All Locations"
+  },
+  "status": {
+    "inStock": "In Stock",
+    "lowStock": "Low Stock",
+    "outOfStock": "Out of Stock"
+  },
+  "movements": {
+    "title": "Stock Movements",
+    "type": "Type",
+    "reference": "Reference",
+    "quantity": "Quantity",
+    "date": "Date",
+    "notes": "Notes",
+    "types": {
+      "receipt": "Receipt",
+      "issue": "Issue",
+      "adjustment": "Adjustment"
+    }
+  },
+  "messages": {
+    "noInventory": "No inventory items found"
+  }
+}

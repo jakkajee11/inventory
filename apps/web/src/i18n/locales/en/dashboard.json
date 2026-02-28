@@ -1,0 +1,40 @@
+{
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening",
+    "welcomeMessage": "Here's what's happening with your inventory today."
+  },
+  "stats": {
+    "totalProducts": "Total Products",
+    "lowStockItems": "Low Stock Items",
+    "outOfStock": "Out of Stock",
+    "inventoryValue": "Inventory Value",
+    "needsAttention": "Needs attention"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "addProduct": "Add Product",
+    "addProductDesc": "Create a new product",
+    "goodsReceipt": "Goods Receipt",
+    "goodsReceiptDesc": "Receive inventory",
+    "goodsIssue": "Goods Issue",
+    "goodsIssueDesc": "Issue inventory",
+    "adjustStock": "Adjust Stock",
+    "adjustStockDesc": "Stock adjustment"
+  },
+  "lowStockAlerts": {
+    "title": "Low Stock Alerts",
+    "viewAll": "View All",
+    "noAlerts": "No low stock alerts"
+  },
+  "activityFeed": {
+    "title": "Recent Activity",
+    "viewAll": "View All",
+    "noActivity": "No recent activity"
+  },
+  "charts": {
+    "inventoryTrends": "Inventory Trends",
+    "movementSummary": "Movement Summary"
+  }
+}

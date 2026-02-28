@@ -1,10 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import type { Route } from 'next';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link } from '@/i18n/navigation';
 
 interface StatsCardProps {
   title: string;
@@ -13,7 +12,7 @@ interface StatsCardProps {
   trend?: 'up' | 'down' | 'neutral';
   icon: React.ReactNode;
   description?: string;
-  href?: Route;
+  href?: string;
   isLoading?: boolean;
   valuePrefix?: string;
   valueSuffix?: string;

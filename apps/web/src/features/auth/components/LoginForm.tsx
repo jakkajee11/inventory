@@ -6,10 +6,12 @@ import { loginSchema, type LoginFormData } from '../schemas/login.schema';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+import { useTranslations } from 'next-intl';
 
 export function LoginForm() {
   const { login, isLoading, loginError } = useAuth();
+  const t = useTranslations('auth.login');
 
   const {
     register,
@@ -32,7 +34,7 @@ export function LoginForm() {
       <div>
         <Input
           type="email"
-          placeholder="Email address"
+          placeholder={t('emailPlaceholder')}
           {...register('email')}
           error={errors.email?.message}
         />
@@ -42,7 +44,7 @@ export function LoginForm() {
       <div>
         <Input
           type="password"
-          placeholder="Password"
+          placeholder={t('passwordPlaceholder')}
           {...register('password')}
           error={errors.password?.message}
         />
@@ -51,18 +53,18 @@ export function LoginForm() {
 
       {loginError && (
         <div className="p-3 text-sm text-red-600 bg-red-50 rounded-md">
-          Invalid email or password
+          {t('invalidCredentials')}
         </div>
       )}
 
       <div className="flex items-center justify-between">
         <Link href="/forgot-password" className="text-sm text-blue-600 hover:underline">
-          Forgot password?
+          {t('forgotPassword')}
         </Link>
       </div>
 
       <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? 'Signing in...' : 'Sign in'}
+        {isLoading ? t('signingIn') : t('signIn')}
       </Button>
     </form>
   );

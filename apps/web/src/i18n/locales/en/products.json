@@ -1,0 +1,51 @@
+{
+  "title": "Products",
+  "addProduct": "Add Product",
+  "editProduct": "Edit Product",
+  "productDetails": "Product Details",
+  "form": {
+    "sku": "SKU",
+    "name": "Product Name",
+    "description": "Description",
+    "category": "Category",
+    "unit": "Unit",
+    "unitPrice": "Unit Price",
+    "costPrice": "Cost Price",
+    "minStockLevel": "Minimum Stock Level",
+    "maxStockLevel": "Maximum Stock Level",
+    "image": "Product Image",
+    "uploadImage": "Upload Image",
+    "active": "Active"
+  },
+  "placeholders": {
+    "sku": "Enter SKU",
+    "name": "Enter product name",
+    "description": "Enter description",
+    "category": "Select category",
+    "unit": "Select unit",
+    "unitPrice": "0.00",
+    "costPrice": "0.00",
+    "minStockLevel": "0",
+    "maxStockLevel": "0"
+  },
+  "table": {
+    "sku": "SKU",
+    "name": "Name",
+    "category": "Category",
+    "stock": "Stock",
+    "unitPrice": "Unit Price",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "filters": {
+    "search": "Search products...",
+    "category": "All Categories",
+    "status": "All Status"
+  },
+  "messages": {
+    "noProducts": "No products found",
+    "productCreated": "Product created successfully",
+    "productUpdated": "Product updated successfully",
+    "productDeleted": "Product deleted successfully"
+  }
+}

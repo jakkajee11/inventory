@@ -1,0 +1,28 @@
+{
+  "sidebar": {
+    "dashboard": "แดชบอร์ด",
+    "products": "สินค้า",
+    "inventory": "สินค้าคงคลัง",
+    "receipts": "รับสินค้า",
+    "issues": "เบิกสินค้า",
+    "adjustments": "ปรับปรุงสต็อก",
+    "reports": "รายงาน",
+    "notifications": "การแจ้งเตือน",
+    "settings": "การตั้งค่า",
+    "collapse": "ย่อ"
+  },
+  "header": {
+    "searchPlaceholder": "ค้นหาสินค้า สินค้าคงคลัง ธุรกรรม...",
+    "notifications": "การแจ้งเตือน",
+    "profile": "โปรไฟล์",
+    "settings": "การตั้งค่า",
+    "logout": "ออกจากระบบ",
+    "guest": "ผู้เยี่ยมชม",
+    "notLoggedIn": "ยังไม่ได้เข้าสู่ระบบ"
+  },
+  "language": {
+    "en": "English",
+    "th": "ไทย",
+    "switchLanguage": "เปลี่ยนภาษา"
+  }
+}

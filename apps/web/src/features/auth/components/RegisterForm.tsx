@@ -6,9 +6,11 @@ import { registerSchema, type RegisterFormData } from '../schemas/register.schem
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useTranslations } from 'next-intl';
 
 export function RegisterForm() {
   const { register: registerUser, isLoading, registerError } = useAuth();
+  const t = useTranslations('auth.register');
 
   const {
     register,
@@ -31,7 +33,7 @@ export function RegisterForm() {
       <div>
         <Input
           type="email"
-          placeholder="Email address"
+          placeholder={t('emailPlaceholder')}
           {...register('email')}
         />
         {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
@@ -40,7 +42,7 @@ export function RegisterForm() {
       <div>
         <Input
           type="password"
-          placeholder="Password"
+          placeholder={t('passwordPlaceholder')}
           {...register('password')}
         />
         {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
@@ -49,7 +51,7 @@ export function RegisterForm() {
       <div>
         <Input
           type="password"
-          placeholder="Confirm password"
+          placeholder={t('confirmPasswordPlaceholder')}
           {...register('confirmPassword')}
         />
         {errors.confirmPassword && <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>}
@@ -58,7 +60,7 @@ export function RegisterForm() {
       <div>
         <Input
           type="text"
-          placeholder="Your full name"
+          placeholder={t('namePlaceholder')}
           {...register('name')}
         />
         {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
@@ -67,7 +69,7 @@ export function RegisterForm() {
       <div>
         <Input
           type="text"
-          placeholder="Company name"
+          placeholder={t('companyPlaceholder')}
           {...register('companyName')}
         />
         {errors.companyName && <p className="text-red-500 text-sm mt-1">{errors.companyName.message}</p>}
@@ -76,19 +78,19 @@ export function RegisterForm() {
       <div>
         <Input
           type="text"
-          placeholder="Tax ID (optional)"
+          placeholder={t('taxIdPlaceholder')}
           {...register('companyTaxId')}
         />
       </div>
 
       {registerError && (
         <div className="p-3 text-sm text-red-600 bg-red-50 rounded-md">
-          Registration failed. Please try again.
+          {t('registrationFailed')}
         </div>
       )}
 
       <Button type="submit" className="w-full" disabled={isLoading}>
-        {isLoading ? 'Creating account...' : 'Create account'}
+        {isLoading ? t('creatingAccount') : t('createAccount')}
       </Button>
     </form>
   );

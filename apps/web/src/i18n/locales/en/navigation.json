@@ -1,0 +1,28 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "products": "Products",
+    "inventory": "Inventory",
+    "receipts": "Receipts",
+    "issues": "Issues",
+    "adjustments": "Adjustments",
+    "reports": "Reports",
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "collapse": "Collapse"
+  },
+  "header": {
+    "searchPlaceholder": "Search products, inventory, transactions...",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Log out",
+    "guest": "Guest",
+    "notLoggedIn": "Not logged in"
+  },
+  "language": {
+    "en": "English",
+    "th": "ไทย",
+    "switchLanguage": "Switch Language"
+  }
+}

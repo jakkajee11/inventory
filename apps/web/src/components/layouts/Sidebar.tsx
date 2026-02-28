@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
@@ -19,56 +18,58 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 interface NavItem {
-  title: string;
+  titleKey: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
 }
 
 const navItems: NavItem[] = [
   {
-    title: 'Dashboard',
+    titleKey: 'dashboard',
     href: '/dashboard',
     icon: LayoutDashboard,
   },
   {
-    title: 'Products',
+    titleKey: 'products',
     href: '/products',
     icon: Package,
   },
   {
-    title: 'Inventory',
+    titleKey: 'inventory',
     href: '/inventory',
     icon: Warehouse,
   },
   {
-    title: 'Receipts',
+    titleKey: 'receipts',
     href: '/receipts',
     icon: FileText,
   },
   {
-    title: 'Issues',
+    titleKey: 'issues',
     href: '/issues',
     icon: FileMinus,
   },
   {
-    title: 'Adjustments',
+    titleKey: 'adjustments',
     href: '/adjustments',
     icon: Sliders,
   },
   {
-    title: 'Reports',
+    titleKey: 'reports',
     href: '/reports',
     icon: BarChart3,
   },
   {
-    title: 'Notifications',
+    titleKey: 'notifications',
     href: '/notifications',
     icon: Bell,
   },
   {
-    title: 'Settings',
+    titleKey: 'settings',
     href: '/settings',
     icon: Settings,
   },
@@ -82,6 +83,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const t = useTranslations('navigation.sidebar');
 
   return (
     <>
@@ -110,13 +112,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             )}
           >
             {!isCollapsed && (
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/dashboard" className="flex items-center gap-2">
                 <Boxes className="h-6 w-6 text-primary" />
                 <span className="text-lg font-bold">Inventory</span>
               </Link>
             )}
             {isCollapsed && (
-              <Link href="/" className="flex items-center justify-center">
+              <Link href="/dashboard" className="flex items-center justify-center">
                 <Boxes className="h-6 w-6 text-primary" />
               </Link>
             )}
@@ -126,11 +128,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <nav className="flex-1 overflow-y-auto py-4">
             <ul className="space-y-1 px-2">
               {navItems.map((item) => {
-                const isActive =
-                  item.href === '/'
-                    ? pathname === '/'
-                    : pathname.startsWith(item.href);
+                const isActive = pathname.startsWith(item.href);
                 const Icon = item.icon;
+                const title = t(item.titleKey);
 
                 return (
                   <li key={item.href}>
@@ -144,10 +144,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                           : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground',
                         isCollapsed && 'justify-center px-2'
                       )}
-                      title={isCollapsed ? item.title : undefined}
+                      title={isCollapsed ? title : undefined}
                     >
                       <Icon className="h-5 w-5 flex-shrink-0" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      {!isCollapsed && <span>{title}</span>}
                     </Link>
                   </li>
                 );
@@ -168,7 +168,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               ) : (
                 <>
                   <ChevronLeft className="h-4 w-4 mr-2" />
-                  <span>Collapse</span>
+                  <span>{t('collapse')}</span>
                 </>
               )}
             </Button>

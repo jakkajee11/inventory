@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -28,6 +26,9 @@ import {
   LogOut,
 } from 'lucide-react';
 import { useAuthStore } from '@/stores/auth.store';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
+import { LanguageSwitcher } from '@/components/common/LanguageSwitcher';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -37,6 +38,7 @@ export function Header({ onMenuClick }: HeaderProps) {
   const router = useRouter();
   const { user, logout } = useAuthStore();
   const [searchQuery, setSearchQuery] = useState('');
+  const t = useTranslations('navigation.header');
 
   // Mock notification count - replace with real data later
   const notificationCount = 3;
@@ -80,7 +82,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="Search products, inventory, transactions..."
+            placeholder={t('searchPlaceholder')}
             className="pl-8"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -96,6 +98,9 @@ export function Header({ onMenuClick }: HeaderProps) {
           <span className="sr-only">Search</span>
         </Button>
 
+        {/* Language Switcher */}
+        <LanguageSwitcher />
+
         {/* Notifications */}
         <Button variant="ghost" size="icon" className="relative" asChild>
           <Link href="/notifications">
@@ -105,7 +110,7 @@ export function Header({ onMenuClick }: HeaderProps) {
                 {notificationCount > 9 ? '9+' : notificationCount}
               </span>
             )}
-            <span className="sr-only">Notifications</span>
+            <span className="sr-only">{t('notifications')}</span>
           </Link>
         </Button>
 
@@ -128,10 +133,10 @@ export function Header({ onMenuClick }: HeaderProps) {
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
-                  {user?.name || 'Guest'}
+                  {user?.name || t('guest')}
                 </p>
                 <p className="text-xs leading-none text-muted-foreground">
-                  {user?.email || 'Not logged in'}
+                  {user?.email || t('notLoggedIn')}
                 </p>
               </div>
             </DropdownMenuLabel>
@@ -139,13 +144,13 @@ export function Header({ onMenuClick }: HeaderProps) {
             <DropdownMenuItem asChild>
               <Link href="/settings" className="cursor-pointer">
                 <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+                <span>{t('profile')}</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
               <Link href="/settings" className="cursor-pointer">
                 <Settings className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+                <span>{t('settings')}</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -154,7 +159,7 @@ export function Header({ onMenuClick }: HeaderProps) {
               className="cursor-pointer text-destructive focus:text-destructive"
             >
               <LogOut className="mr-2 h-4 w-4" />
-              <span>Log out</span>
+              <span>{t('logout')}</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

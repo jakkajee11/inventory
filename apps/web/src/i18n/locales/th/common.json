@@ -1,0 +1,40 @@
+{
+  "buttons": {
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "add": "เพิ่ม",
+    "search": "ค้นหา",
+    "filter": "กรอง",
+    "clear": "ล้าง",
+    "submit": "ส่ง",
+    "loading": "กำลังโหลด...",
+    "confirm": "ยืนยัน"
+  },
+  "labels": {
+    "name": "ชื่อ",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "status": "สถานะ",
+    "actions": "การดำเนินการ",
+    "date": "วันที่",
+    "quantity": "จำนวน",
+    "price": "ราคา",
+    "total": "รวม",
+    "description": "รายละเอียด"
+  },
+  "status": {
+    "active": "ใช้งาน",
+    "inactive": "ไม่ใช้งาน",
+    "pending": "รอดำเนินการ",
+    "completed": "เสร็จสิ้น",
+    "draft": "แบบร่าง"
+  },
+  "messages": {
+    "success": "ดำเนินการสำเร็จ",
+    "error": "เกิดข้อผิดพลาด",
+    "confirmDelete": "คุณแน่ใจหรือไม่ที่จะลบรายการนี้?",
+    "noData": "ไม่มีข้อมูล"
+  }
+}

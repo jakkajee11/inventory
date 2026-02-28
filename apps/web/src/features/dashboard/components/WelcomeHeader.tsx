@@ -1,15 +1,17 @@
 'use client';
 
 import { useAuthStore } from '@/stores/auth.store';
+import { useTranslations } from 'next-intl';
 
 export function WelcomeHeader() {
   const { user } = useAuthStore();
+  const t = useTranslations('dashboard.greeting');
 
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return 'Good morning';
-    if (hour < 18) return 'Good afternoon';
-    return 'Good evening';
+    if (hour < 12) return t('morning');
+    if (hour < 18) return t('afternoon');
+    return t('evening');
   };
 
   return (
@@ -18,7 +20,7 @@ export function WelcomeHeader() {
         {getGreeting()}, {user?.name || 'User'}!
       </h1>
       <p className="text-muted-foreground">
-        Here&apos;s what&apos;s happening with your inventory today.
+        {t('welcomeMessage')}
       </p>
     </div>
   );

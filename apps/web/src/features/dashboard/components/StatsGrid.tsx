@@ -1,9 +1,9 @@
 'use client';
 
-import type { Route } from 'next';
 import { Package, AlertTriangle, AlertCircle, Activity } from 'lucide-react';
 import { StatsCard } from './StatsCard';
 import type { DashboardStats } from '../types/dashboard.types';
+import { useTranslations } from 'next-intl';
 
 interface StatsGridProps {
   stats: DashboardStats | undefined;
@@ -11,18 +11,20 @@ interface StatsGridProps {
 }
 
 export function StatsGrid({ stats, isLoading }: StatsGridProps) {
+  const t = useTranslations('dashboard.stats');
+
   const statsData: Array<{
     title: string;
     value: number;
     icon: React.ReactNode;
-    href: Route;
+    href: string;
     change?: number;
     trend?: 'up' | 'down';
     description?: string;
     valuePrefix?: string;
   }> = [
     {
-      title: 'Total Products',
+      title: t('totalProducts'),
       value: stats?.totalProducts ?? 0,
       icon: <Package className="h-5 w-5" />,
       href: '/products',
@@ -30,7 +32,7 @@ export function StatsGrid({ stats, isLoading }: StatsGridProps) {
       trend: 'up' as const,
     },
     {
-      title: 'Low Stock Items',
+      title: t('lowStockItems'),
       value: stats?.lowStockCount ?? 0,
       icon: <AlertTriangle className="h-5 w-5" />,
       href: '/inventory',
@@ -38,14 +40,14 @@ export function StatsGrid({ stats, isLoading }: StatsGridProps) {
       trend: 'down' as const,
     },
     {
-      title: 'Out of Stock',
+      title: t('outOfStock'),
       value: stats?.outOfStockCount ?? 0,
       icon: <AlertCircle className="h-5 w-5" />,
       href: '/inventory',
-      description: 'Needs attention',
+      description: t('needsAttention'),
     },
     {
-      title: 'Inventory Value',
+      title: t('inventoryValue'),
       value: stats?.totalValue ?? 0,
       icon: <Activity className="h-5 w-5" />,
       href: '/reports',

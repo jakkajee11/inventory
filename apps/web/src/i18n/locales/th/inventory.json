@@ -1,0 +1,40 @@
+{
+  "title": "สินค้าคงคลัง",
+  "stockMovements": "การเคลื่อนไหวสินค้า",
+  "table": {
+    "product": "สินค้า",
+    "sku": "รหัสสินค้า",
+    "quantity": "จำนวน",
+    "available": "พร้อมใช้งาน",
+    "reserved": "จองไว้",
+    "location": "ตำแหน่ง",
+    "lastUpdated": "อัปเดตล่าสุด",
+    "actions": "การดำเนินการ"
+  },
+  "filters": {
+    "search": "ค้นหาสินค้าคงคลัง...",
+    "status": "ทุกสถานะ",
+    "location": "ทุกตำแหน่ง"
+  },
+  "status": {
+    "inStock": "มีสินค้า",
+    "lowStock": "สินค้าใกล้หมด",
+    "outOfStock": "สินค้าหมด"
+  },
+  "movements": {
+    "title": "การเคลื่อนไหวสินค้า",
+    "type": "ประเภท",
+    "reference": "อ้างอิง",
+    "quantity": "จำนวน",
+    "date": "วันที่",
+    "notes": "หมายเหตุ",
+    "types": {
+      "receipt": "รับเข้า",
+      "issue": "เบิกออก",
+      "adjustment": "ปรับปรุง"
+    }
+  },
+  "messages": {
+    "noInventory": "ไม่พบรายการสินค้าคงคลัง"
+  }
+}
