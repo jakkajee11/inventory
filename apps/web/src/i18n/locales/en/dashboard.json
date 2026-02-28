@@ -38,6 +38,14 @@
   },
   "charts": {
     "inventoryTrends": "Inventory Trends",
-    "movementSummary": "Movement Summary"
+    "movementSummary": "Movement Summary",
+    "last30Days": "Last 30 days movement overview",
+    "last30DaysBreakdown": "Last 30 days breakdown",
+    "receipts": "Receipts",
+    "issues": "Issues",
+    "adjustments": "Adjustments",
+    "units": "Units",
+    "noTrendData": "No trend data available",
+    "noMovementData": "No movement data"
   }
 }

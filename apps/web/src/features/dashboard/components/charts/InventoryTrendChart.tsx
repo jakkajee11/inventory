@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useTranslations } from 'next-intl';
 import type { TrendDataPoint } from '../../types/dashboard.types';
 
 interface InventoryTrendChartProps {
@@ -19,6 +20,8 @@ interface InventoryTrendChartProps {
 }
 
 export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProps) {
+  const t = useTranslations('dashboard.charts');
+
   if (isLoading) {
     return (
       <div className="bento-item glass flex h-full flex-col rounded-xl p-5">
@@ -36,8 +39,8 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
   return (
     <div className="bento-item glass flex h-full flex-col rounded-xl p-5">
       <div className="mb-4">
-        <h3 className="text-base font-semibold">Inventory Trends</h3>
-        <p className="text-sm text-muted-foreground">Last 30 days movement overview</p>
+        <h3 className="text-base font-semibold">{t('inventoryTrends')}</h3>
+        <p className="text-sm text-muted-foreground">{t('last30Days')}</p>
       </div>
       <div className="min-h-0 flex-1">
         {data && data.length > 0 ? (
@@ -87,7 +90,7 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
               <Area
                 type="monotone"
                 dataKey="receipts"
-                name="Receipts"
+                name={t('receipts')}
                 stroke="#10b981"
                 strokeWidth={2}
                 fillOpacity={1}
@@ -96,7 +99,7 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
               <Area
                 type="monotone"
                 dataKey="issues"
-                name="Issues"
+                name={t('issues')}
                 stroke="#3b82f6"
                 strokeWidth={2}
                 fillOpacity={1}
@@ -106,7 +109,7 @@ export function InventoryTrendChart({ data, isLoading }: InventoryTrendChartProp
           </ResponsiveContainer>
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            No trend data available
+            {t('noTrendData')}
           </div>
         )}
       </div>

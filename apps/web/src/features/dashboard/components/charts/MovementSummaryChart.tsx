@@ -2,6 +2,7 @@
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useTranslations } from 'next-intl';
 import type { MovementSummary } from '../../types/dashboard.types';
 
 interface MovementSummaryChartProps {
@@ -16,6 +17,8 @@ const COLORS = {
 };
 
 export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartProps) {
+  const t = useTranslations('dashboard.charts');
+
   if (isLoading) {
     return (
       <div className="bento-item glass flex h-full flex-col rounded-xl p-5">
@@ -32,9 +35,9 @@ export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartPr
 
   const chartData = data
     ? [
-        { name: 'Receipts', value: data.receipts, color: COLORS.receipts },
-        { name: 'Issues', value: data.issues, color: COLORS.issues },
-        { name: 'Adjustments', value: data.adjustments, color: COLORS.adjustments },
+        { name: t('receipts'), value: data.receipts, color: COLORS.receipts },
+        { name: t('issues'), value: data.issues, color: COLORS.issues },
+        { name: t('adjustments'), value: data.adjustments, color: COLORS.adjustments },
       ]
     : [];
 
@@ -43,8 +46,8 @@ export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartPr
   return (
     <div className="bento-item glass flex h-full flex-col rounded-xl p-5">
       <div className="mb-4">
-        <h3 className="text-base font-semibold">Movement Summary</h3>
-        <p className="text-sm text-muted-foreground">Last 30 days breakdown</p>
+        <h3 className="text-base font-semibold">{t('movementSummary')}</h3>
+        <p className="text-sm text-muted-foreground">{t('last30DaysBreakdown')}</p>
       </div>
       <div className="min-h-0 flex-1">
         {total > 0 ? (
@@ -70,7 +73,7 @@ export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartPr
                   borderRadius: '8px',
                   fontSize: '12px',
                 }}
-                formatter={(value: number) => [value.toLocaleString(), 'Units']}
+                formatter={(value: number) => [value.toLocaleString(), t('units')]}
               />
               <Legend
                 wrapperStyle={{ fontSize: '11px' }}
@@ -82,7 +85,7 @@ export function MovementSummaryChart({ data, isLoading }: MovementSummaryChartPr
           </ResponsiveContainer>
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-            No movement data
+            {t('noMovementData')}
           </div>
         )}
       </div>

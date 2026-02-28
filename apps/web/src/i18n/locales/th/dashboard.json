@@ -38,6 +38,14 @@
   },
   "charts": {
     "inventoryTrends": "แนวโน้มสินค้าคงคลัง",
-    "movementSummary": "สรุปการเคลื่อนไหว"
+    "movementSummary": "สรุปการเคลื่อนไหว",
+    "last30Days": "ภาพรวม 30 วันที่ผ่านมา",
+    "last30DaysBreakdown": "สรุปยอด 30 วันที่ผ่านมา",
+    "receipts": "รับเข้า",
+    "issues": "เบิกออก",
+    "adjustments": "ปรับปรุง",
+    "units": "หน่วย",
+    "noTrendData": "ไม่มีข้อมูลแนวโน้ม",
+    "noMovementData": "ไม่มีข้อมูลการเคลื่อนไหว"
   }
 }
