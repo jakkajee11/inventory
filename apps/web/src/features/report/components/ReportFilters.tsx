@@ -55,8 +55,8 @@ export function ReportFilters({
     const defaultFilters = {
       startDate: '',
       endDate: '',
-      productId: '',
-      categoryId: '',
+      productId: 'all',
+      categoryId: 'all',
     };
     setTempFilters(defaultFilters);
     onReset();
@@ -112,7 +112,7 @@ export function ReportFilters({
         <div className="space-y-2">
           <label className="text-sm font-medium">Product</label>
           <Select
-            value={tempFilters.productId || ''}
+            value={tempFilters.productId || 'all'}
             onValueChange={(value) => handleFilterChange('productId', value)}
             disabled={isFetching}
           >
@@ -120,7 +120,7 @@ export function ReportFilters({
               <SelectValue placeholder="All Products" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Products</SelectItem>
+              <SelectItem value="all">All Products</SelectItem>
               {products.map((product) => (
                 <SelectItem key={product.id} value={product.id}>
                   {product.name} ({product.sku})
@@ -133,7 +133,7 @@ export function ReportFilters({
         <div className="space-y-2">
           <label className="text-sm font-medium">Category</label>
           <Select
-            value={tempFilters.categoryId || ''}
+            value={tempFilters.categoryId || 'all'}
             onValueChange={(value) => handleFilterChange('categoryId', value)}
             disabled={isFetching}
           >
@@ -141,7 +141,7 @@ export function ReportFilters({
               <SelectValue placeholder="All Categories" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}

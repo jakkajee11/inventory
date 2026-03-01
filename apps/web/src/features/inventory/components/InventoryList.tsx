@@ -8,7 +8,7 @@ import { useTranslations } from 'next-intl';
 export function InventoryList() {
   const [filters, setFilters] = useState({
     search: '',
-    categoryId: '',
+    categoryId: 'all',
     stockStatus: 'all' as 'all' | 'low' | 'out' | 'normal',
   });
   const t = useTranslations('inventory');
@@ -35,7 +35,7 @@ export function InventoryList() {
         onSearchChange={(search) => setFilters({ ...filters, search })}
         onCategoryChange={(categoryId) => setFilters({ ...filters, categoryId })}
         onStockStatusChange={(stockStatus) => setFilters({ ...filters, stockStatus })}
-        onReset={() => setFilters({ search: '', categoryId: '', stockStatus: 'all' })}
+        onReset={() => setFilters({ search: '', categoryId: 'all', stockStatus: 'all' })}
         isFetching={isLoading}
       />
 

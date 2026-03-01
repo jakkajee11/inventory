@@ -9,7 +9,7 @@ export interface ExportFilter {
 
 export function exportInventoryToCSV(filter?: ExportFilter) {
   const params = new URLSearchParams();
-  if (filter?.categoryId) params.append('categoryId', filter.categoryId);
+  if (filter?.categoryId && filter.categoryId !== 'all') params.append('categoryId', filter.categoryId);
   if (filter?.warehouseId) params.append('warehouseId', filter.warehouseId);
   if (filter?.lowStockOnly) params.append('lowStockOnly', filter.lowStockOnly.toString());
   if (filter?.includeInactive) params.append('includeInactive', filter.includeInactive.toString());
@@ -20,7 +20,7 @@ export function exportInventoryToCSV(filter?: ExportFilter) {
 
 export function exportInventoryToExcel(filter?: ExportFilter) {
   const params = new URLSearchParams();
-  if (filter?.categoryId) params.append('categoryId', filter.categoryId);
+  if (filter?.categoryId && filter.categoryId !== 'all') params.append('categoryId', filter.categoryId);
   if (filter?.warehouseId) params.append('warehouseId', filter.warehouseId);
   if (filter?.lowStockOnly) params.append('lowStockOnly', filter.lowStockOnly.toString());
   if (filter?.includeInactive) params.append('includeInactive', filter.includeInactive.toString());

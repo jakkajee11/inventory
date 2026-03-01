@@ -15,8 +15,8 @@ export function useInventory(filters: InventoryFilters = {}) {
     queryFn: async () => {
       const params = new URLSearchParams();
       if (filters.search) params.append('search', filters.search);
-      if (filters.categoryId) params.append('categoryId', filters.categoryId);
-      if (filters.stockStatus) params.append('stockStatus', filters.stockStatus);
+      if (filters.categoryId && filters.categoryId !== 'all') params.append('categoryId', filters.categoryId);
+      if (filters.stockStatus && filters.stockStatus !== 'all') params.append('stockStatus', filters.stockStatus);
       if (filters.page) params.append('page', filters.page.toString());
       if (filters.limit) params.append('limit', filters.limit.toString());
 

@@ -14,7 +14,7 @@ export function useStockReport(params: { asOfDate?: string; categoryId?: string;
     queryFn: async () => {
       const searchParams = new URLSearchParams();
       if (params.asOfDate) searchParams.append('asOfDate', params.asOfDate);
-      if (params.categoryId) searchParams.append('categoryId', params.categoryId);
+      if (params.categoryId && params.categoryId !== 'all') searchParams.append('categoryId', params.categoryId);
       if (params.page) searchParams.append('page', params.page.toString());
       if (params.limit) searchParams.append('limit', params.limit.toString());
 
@@ -31,8 +31,8 @@ export function useMovementReport(params: { startDate?: string; endDate?: string
       const searchParams = new URLSearchParams();
       if (params.startDate) searchParams.append('startDate', params.startDate);
       if (params.endDate) searchParams.append('endDate', params.endDate);
-      if (params.productId) searchParams.append('productId', params.productId);
-      if (params.categoryId) searchParams.append('categoryId', params.categoryId);
+      if (params.productId && params.productId !== 'all') searchParams.append('productId', params.productId);
+      if (params.categoryId && params.categoryId !== 'all') searchParams.append('categoryId', params.categoryId);
       if (params.page) searchParams.append('page', params.page.toString());
       if (params.limit) searchParams.append('limit', params.limit.toString());
 
@@ -45,7 +45,7 @@ export function useMovementReport(params: { startDate?: string; endDate?: string
 export function getStockReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
-    if (value) searchParams.append(key, value.toString());
+    if (value && value !== 'all') searchParams.append(key, value.toString());
   });
   return `${apiClient.defaults.baseURL}/reports/stock/export/${format}?${searchParams.toString()}`;
 }
@@ -53,7 +53,7 @@ export function getStockReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', params:
 export function getMovementReportExportUrl(format: 'PDF' | 'EXCEL' | 'CSV', params: Record<string, any> = {}) {
   const searchParams = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
-    if (value) searchParams.append(key, value.toString());
+    if (value && value !== 'all') searchParams.append(key, value.toString());
   });
   return `${apiClient.defaults.baseURL}/reports/movements/export/${format}?${searchParams.toString()}`;
 }

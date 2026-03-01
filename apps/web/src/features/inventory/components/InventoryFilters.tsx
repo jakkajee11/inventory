@@ -78,7 +78,7 @@ export function InventoryFilters({
               <SelectValue placeholder={t('category')} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">{t('allCategories')}</SelectItem>
+              <SelectItem value="all">{t('allCategories')}</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category.id} value={category.id}>
                   {category.name}
