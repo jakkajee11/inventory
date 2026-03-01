@@ -1,0 +1,58 @@
+{
+  "title": "Categories",
+  "addCategory": "Add Category",
+  "addFirstCategory": "Add your first category",
+  "editCategory": "Edit Category",
+  "categoryDetails": "Category Details",
+  "categoriesTotal": "{count, plural, =0 {No categories} one {# category} other {# categories}} total",
+  "form": {
+    "name": "Category Name",
+    "description": "Description",
+    "parentCategory": "Parent Category",
+    "noParent": "No parent (top level)",
+    "sortOrder": "Sort Order",
+    "active": "Active"
+  },
+  "placeholders": {
+    "name": "Enter category name",
+    "description": "Enter description",
+    "parentCategory": "Select parent category",
+    "sortOrder": "0"
+  },
+  "table": {
+    "name": "Name",
+    "description": "Description",
+    "parent": "Parent",
+    "products": "Products",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "filters": {
+    "search": "Search categories...",
+    "showInactive": "Show Inactive",
+    "hideInactive": "Hide Inactive"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {page} of {total}"
+  },
+  "messages": {
+    "noCategories": "No categories found",
+    "categoryCreated": "Category created successfully",
+    "categoryUpdated": "Category updated successfully",
+    "categoryDeleted": "Category deleted successfully",
+    "deleteConfirm": "Are you sure you want to delete this category?",
+    "cannotDeleteWithProducts": "Cannot delete category with associated products",
+    "cannotDeleteWithChildren": "Cannot delete category with subcategories"
+  },
+  "validation": {
+    "nameRequired": "Category name is required",
+    "nameMinLength": "Category name must be at least 2 characters",
+    "nameMaxLength": "Category name must not exceed 100 characters"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  }
+}

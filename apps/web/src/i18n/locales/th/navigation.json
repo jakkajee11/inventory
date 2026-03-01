@@ -2,6 +2,7 @@
   "sidebar": {
     "dashboard": "แดชบอร์ด",
     "products": "สินค้า",
+    "categories": "หมวดหมู่",
     "inventory": "สินค้าคงคลัง",
     "receipts": "รับสินค้า",
     "issues": "เบิกสินค้า",

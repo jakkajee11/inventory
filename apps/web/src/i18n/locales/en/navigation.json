@@ -2,6 +2,7 @@
   "sidebar": {
     "dashboard": "Dashboard",
     "products": "Products",
+    "categories": "Categories",
     "inventory": "Inventory",
     "receipts": "Receipts",
     "issues": "Issues",

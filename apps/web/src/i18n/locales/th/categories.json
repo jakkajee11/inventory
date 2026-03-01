@@ -1,0 +1,58 @@
+{
+  "title": "หมวดหมู่",
+  "addCategory": "เพิ่มหมวดหมู่",
+  "addFirstCategory": "เพิ่มหมวดหมู่แรกของคุณ",
+  "editCategory": "แก้ไขหมวดหมู่",
+  "categoryDetails": "รายละเอียดหมวดหมู่",
+  "categoriesTotal": "{count, plural, =0 {ไม่มีหมวดหมู่} other {# หมวดหมู่}}",
+  "form": {
+    "name": "ชื่อหมวดหมู่",
+    "description": "คำอธิบาย",
+    "parentCategory": "หมวดหมู่หลัก",
+    "noParent": "ไม่มีหมวดหมู่หลัก (ระดับบนสุด)",
+    "sortOrder": "ลำดับการเรียง",
+    "active": "ใช้งาน"
+  },
+  "placeholders": {
+    "name": "กรอกชื่อหมวดหมู่",
+    "description": "กรอกคำอธิบาย",
+    "parentCategory": "เลือกหมวดหมู่หลัก",
+    "sortOrder": "0"
+  },
+  "table": {
+    "name": "ชื่อ",
+    "description": "คำอธิบาย",
+    "parent": "หมวดหมู่หลัก",
+    "products": "สินค้า",
+    "status": "สถานะ",
+    "actions": "การดำเนินการ"
+  },
+  "filters": {
+    "search": "ค้นหาหมวดหมู่...",
+    "showInactive": "แสดงที่ไม่ใช้งาน",
+    "hideInactive": "ซ่อนที่ไม่ใช้งาน"
+  },
+  "pagination": {
+    "previous": "ก่อนหน้า",
+    "next": "ถัดไป",
+    "pageOf": "หน้า {page} จาก {total}"
+  },
+  "messages": {
+    "noCategories": "ไม่พบหมวดหมู่",
+    "categoryCreated": "สร้างหมวดหมู่สำเร็จ",
+    "categoryUpdated": "อัปเดตหมวดหมู่สำเร็จ",
+    "categoryDeleted": "ลบหมวดหมู่สำเร็จ",
+    "deleteConfirm": "คุณแน่ใจหรือไม่ที่จะลบหมวดหมู่นี้?",
+    "cannotDeleteWithProducts": "ไม่สามารถลบหมวดหมู่ที่มีสินค้า",
+    "cannotDeleteWithChildren": "ไม่สามารถลบหมวดหมู่ที่มีหมวดหมู่ย่อย"
+  },
+  "validation": {
+    "nameRequired": "ต้องระบุชื่อหมวดหมู่",
+    "nameMinLength": "ชื่อหมวดหมู่ต้องมีอย่างน้อย 2 ตัวอักษร",
+    "nameMaxLength": "ชื่อหมวดหมู่ต้องไม่เกิน 100 ตัวอักษร"
+  },
+  "status": {
+    "active": "ใช้งาน",
+    "inactive": "ไม่ใช้งาน"
+  }
+}

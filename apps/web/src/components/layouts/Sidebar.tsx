@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import {
   LayoutDashboard,
   Package,
+  Layers,
   Warehouse,
   FileText,
   FileMinus,
@@ -37,6 +38,11 @@ const navItems: NavItem[] = [
     titleKey: 'products',
     href: '/products',
     icon: Package,
+  },
+  {
+    titleKey: 'categories',
+    href: '/categories',
+    icon: Layers,
   },
   {
     titleKey: 'inventory',
